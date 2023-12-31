@@ -44,13 +44,13 @@ class _OnboardingScreenState extends State<OnboardingScreen> {
                       Text('Summer Special',
                           style: GoogleFonts.calistoga(
                               fontSize: 30,
-                              color: const Color(0xFFF5A614),
+                              color: Colors.white,
                               fontWeight: FontWeight.bold)),
                       SizedBox(height: Get.height * .02),
                       Text(
                           'Lose yourself in the symphony of flavors that dance on your taste buds with every spoonful of ice cream',
                           style: GoogleFonts.calistoga(
-                              fontSize: 21, color: const Color(0xFFF5A614)),
+                              fontSize: 21, color: Colors.white),
                           textAlign: TextAlign.center),
                       const Spacer(),
                       Padding(
@@ -129,7 +129,7 @@ class _OnboardingScreenState extends State<OnboardingScreen> {
                       Text('Fast Foods',
                           style: GoogleFonts.calistoga(
                               fontSize: 30,
-                              color: Colors.yellowAccent,
+                              color: Colors.white,
                               fontWeight: FontWeight.bold)),
                       SizedBox(height: Get.height * .02),
                       Text(
@@ -212,12 +212,12 @@ class _OnboardingScreenState extends State<OnboardingScreen> {
                       children: [
                         Text('Dear User',
                             style: GoogleFonts.calistoga(
-                                fontSize: 30, color: Colors.yellowAccent)),
+                                fontSize: 30, color: Colors.white)),
                         SizedBox(height: Get.height * .02),
                         Text(
                             'We Welcome you to Recipe Kingdom – where every recipe is a new adventure in flavor!',
                             style: GoogleFonts.calistoga(
-                                fontSize: 18, color: const Color(0xFF0FF000)),
+                                fontSize: 18, color: Colors.white),
                             textAlign: TextAlign.center),
                         SizedBox(height: Get.height * .15),
                         Container(

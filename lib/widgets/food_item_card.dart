@@ -18,17 +18,13 @@ class FoodItemCard extends StatelessWidget {
         color: Colors.white,
         borderRadius: BorderRadius.circular(10),
         boxShadow: const [
-          BoxShadow(
-            color: Colors.red,
-            blurRadius: 5,
-            offset: Offset(0, 0), // Shadow position
-          ),
+          BoxShadow(color: Colors.red, blurRadius: 5),
         ],
       ),
       child: Column(
         children: [
           Padding(
-            padding: const EdgeInsets.only(top: 8),
+            padding: const EdgeInsets.only(top: 10),
             child: Container(
               padding: const EdgeInsets.only(top: 10),
               width: Get.width * .38,
@@ -39,10 +35,10 @@ class FoodItemCard extends StatelessWidget {
                     image: AssetImage(itemImage), fit: BoxFit.cover),
                 borderRadius: BorderRadius.circular(10),
               ),
-              child: Image.asset(itemImage, fit: BoxFit.fill),
             ),
           ),
-          Text(itemName, style: GoogleFonts.poppins()),
+          Text(itemName,
+              style: GoogleFonts.poppins(fontWeight: FontWeight.bold)),
           Row(
             mainAxisAlignment: MainAxisAlignment.spaceAround,
             children: [

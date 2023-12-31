@@ -14,7 +14,8 @@ class DetailsScreen extends StatelessWidget {
       appBar: AppBar(
         backgroundColor: AppConstant.appMainColor,
         centerTitle: true,
-        title: Text(selectedItem.itemName as String),
+        title: Text(selectedItem.itemName as String,
+            style: GoogleFonts.poppins(color: Colors.white)),
       ),
       body: Padding(
         padding: const EdgeInsets.all(16.0),

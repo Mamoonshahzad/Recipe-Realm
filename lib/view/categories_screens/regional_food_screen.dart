@@ -9,7 +9,7 @@ import 'package:recipe_realm/utils/app_constants.dart';
 import 'package:recipe_realm/widgets/food_item_card.dart';
 import 'package:recipe_realm/widgets/search_bar.dart';
 
-import '../../widgets/details_screen.dart';
+import '../details_screen.dart';
 
 class RegionalFoodScreen extends StatefulWidget {
   const RegionalFoodScreen({super.key});
@@ -28,52 +28,60 @@ class _RegionalFoodScreenState extends State<RegionalFoodScreen> {
         title: Text('Regional Food',
             style: GoogleFonts.poppins(color: Colors.white)),
       ),
-      body: Padding(
-        padding: const EdgeInsets.all(8.0),
-        child: Column(
-          children: [
-            const Padding(
-              padding: EdgeInsets.all(5.0),
-              child: ReUsableSearchBar(),
-            ),
-            Expanded(
-              child: Container(
-                width: Get.width,
-                height: Get.height,
-                child: FutureBuilder(
-                  future: ReadJsonData(),
-                  builder: (context, data) {
-                    if (data.hasError) {
-                      return Center(child: Text('${data.error}'));
-                    } else if (data.hasData) {
-                      var foodItems = data.data as List<FoodItemsDataModel>;
-                      return GridView.builder(
-                          gridDelegate:
-                              const SliverGridDelegateWithFixedCrossAxisCount(
-                                  crossAxisCount: 2),
-                          itemCount: foodItems.length,
-                          itemBuilder: (context, index) {
-                            return GestureDetector(
-                              onTap: () => navigateToDetailsScreen(
-                                  context, foodItems[index]),
-                              child: Padding(
-                                padding: const EdgeInsets.all(8),
-                                child: FoodItemCard(
-                                    itemImage:
-                                        foodItems[index].imageUrl.toString(),
-                                    itemName:
-                                        foodItems[index].itemName.toString()),
-                              ),
-                            );
-                          });
-                    } else {
-                      return const Center(child: CircularProgressIndicator());
-                    }
-                  },
+      body: GestureDetector(
+        onTap: () {
+          FocusScopeNode currentFocus = FocusScope.of(context);
+          if (!currentFocus.hasPrimaryFocus) {
+            currentFocus.unfocus();
+          }
+        },
+        child: Padding(
+          padding: const EdgeInsets.all(8.0),
+          child: Column(
+            children: [
+              const Padding(
+                padding: EdgeInsets.all(5.0),
+                child: ReUsableSearchBar(),
+              ),
+              Expanded(
+                child: Container(
+                  width: Get.width,
+                  height: Get.height,
+                  child: FutureBuilder(
+                    future: ReadJsonData(),
+                    builder: (context, data) {
+                      if (data.hasError) {
+                        return Center(child: Text('${data.error}'));
+                      } else if (data.hasData) {
+                        var foodItems = data.data as List<FoodItemsDataModel>;
+                        return GridView.builder(
+                            gridDelegate:
+                                const SliverGridDelegateWithFixedCrossAxisCount(
+                                    crossAxisCount: 2),
+                            itemCount: foodItems.length,
+                            itemBuilder: (context, index) {
+                              return GestureDetector(
+                                onTap: () => navigateToDetailsScreen(
+                                    context, foodItems[index]),
+                                child: Padding(
+                                  padding: const EdgeInsets.all(8),
+                                  child: FoodItemCard(
+                                      itemImage:
+                                          foodItems[index].imageUrl.toString(),
+                                      itemName:
+                                          foodItems[index].itemName.toString()),
+                                ),
+                              );
+                            });
+                      } else {
+                        return const Center(child: CircularProgressIndicator());
+                      }
+                    },
+                  ),
                 ),
               ),
-            ),
-          ],
+            ],
+          ),
         ),
       ),
     );

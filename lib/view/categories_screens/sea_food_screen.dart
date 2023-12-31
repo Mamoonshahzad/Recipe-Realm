@@ -8,7 +8,7 @@ import 'package:flutter/services.dart' as root_bundle;
 import 'package:recipe_realm/widgets/food_item_card.dart';
 
 import '../../utils/app_constants.dart';
-import '../../widgets/details_screen.dart';
+import '../details_screen.dart';
 import '../../widgets/search_bar.dart';
 
 class SeaFoodScreen extends StatefulWidget {
@@ -30,52 +30,62 @@ class _SeaFoodScreenState extends State<SeaFoodScreen> {
         title:
             Text('Sea Food', style: GoogleFonts.poppins(color: Colors.white)),
       ),
-      body: Padding(
-        padding: const EdgeInsets.all(8.0),
-        child: Column(
-          children: [
-            const ReUsableSearchBar(),
-            Expanded(
-              child: Container(
-                width: Get.width,
-                height: Get.height,
-                child: FutureBuilder(
-                  future: ReadJsonData(),
-                  builder: (context, data) {
-                    if (data.hasError) {
-                      return Center(child: Text('${data.error}'));
-                    } else if (data.hasData) {
-                      var foodItems = data.data as List<FoodItemsDataModel>;
-                      return GridView.builder(
-                        gridDelegate:
-                            const SliverGridDelegateWithFixedCrossAxisCount(
-                          crossAxisCount: 2,
-                        ),
-                        itemCount: foodItems.length,
-                        itemBuilder: (context, index) {
-                          return GestureDetector(
-                            onTap: () => navigateToDetailsScreen(
-                              context,
-                              foodItems[index],
-                            ),
-                            child: Padding(
-                              padding: const EdgeInsets.all(8),
-                              child: FoodItemCard(
-                                itemImage: foodItems[index].imageUrl.toString(),
-                                itemName: foodItems[index].itemName.toString(),
+      body: GestureDetector(
+        onTap: () {
+          FocusScopeNode currentFocus = FocusScope.of(context);
+          if (!currentFocus.hasPrimaryFocus) {
+            currentFocus.unfocus();
+          }
+        },
+        child: Padding(
+          padding: const EdgeInsets.all(8.0),
+          child: Column(
+            children: [
+              const ReUsableSearchBar(),
+              Expanded(
+                child: Container(
+                  width: Get.width,
+                  height: Get.height,
+                  child: FutureBuilder(
+                    future: ReadJsonData(),
+                    builder: (context, data) {
+                      if (data.hasError) {
+                        return Center(child: Text('${data.error}'));
+                      } else if (data.hasData) {
+                        var foodItems = data.data as List<FoodItemsDataModel>;
+                        return GridView.builder(
+                          gridDelegate:
+                              const SliverGridDelegateWithFixedCrossAxisCount(
+                            crossAxisCount: 2,
+                          ),
+                          itemCount: foodItems.length,
+                          itemBuilder: (context, index) {
+                            return GestureDetector(
+                              onTap: () => navigateToDetailsScreen(
+                                context,
+                                foodItems[index],
                               ),
-                            ),
-                          );
-                        },
-                      );
-                    } else {
-                      return const Center(child: CircularProgressIndicator());
-                    }
-                  },
+                              child: Padding(
+                                padding: const EdgeInsets.all(8),
+                                child: FoodItemCard(
+                                  itemImage:
+                                      foodItems[index].imageUrl.toString(),
+                                  itemName:
+                                      foodItems[index].itemName.toString(),
+                                ),
+                              ),
+                            );
+                          },
+                        );
+                      } else {
+                        return const Center(child: CircularProgressIndicator());
+                      }
+                    },
+                  ),
                 ),
               ),
-            ),
-          ],
+            ],
+          ),
         ),
       ),
     );

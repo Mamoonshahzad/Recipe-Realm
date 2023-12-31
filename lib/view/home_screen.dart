@@ -8,6 +8,7 @@ import 'package:recipe_realm/view/categories_screens/regional_food_screen.dart';
 import 'package:recipe_realm/view/categories_screens/special_diet_screen.dart';
 import 'package:recipe_realm/view/categories_screens/veg_food_screen.dart';
 import 'package:recipe_realm/widgets/food_item_card.dart';
+import 'package:recipe_realm/widgets/home_screen_scrollview.dart';
 import 'package:recipe_realm/widgets/search_bar.dart';
 
 import '../widgets/home_screen_grid.dart';
@@ -71,8 +72,8 @@ class _HomeScreenState extends State<HomeScreen> {
                 crossAxisAlignment: CrossAxisAlignment.center,
                 children: [
                   Container(
-                      width: Get.width * .3,
-                      height: Get.width * .3,
+                      width: Get.width * .25,
+                      height: Get.width * .25,
                       child: Image.asset(
                           'assets/images/home_screen/welcome_drink.png')),
                   Text('Welcome Foodie',
@@ -119,144 +120,131 @@ class _HomeScreenState extends State<HomeScreen> {
           ],
         ),
       ),
-      body: SingleChildScrollView(
-        child: Padding(
-          padding: const EdgeInsets.symmetric(horizontal: 15),
-          child: Column(
-            mainAxisAlignment: MainAxisAlignment.start,
-            children: [
-              Align(
-                  alignment: Alignment.centerLeft,
-                  child: Text('Common Dishes',
-                      style: GoogleFonts.poppins(
-                          fontSize: 17, fontWeight: FontWeight.bold))),
-              SingleChildScrollView(
-                scrollDirection: Axis.horizontal,
-                child: Row(
-                  children: [
-                    Container(
-                      width: Get.width * 0.8,
-                      height: Get.height * 0.2,
-                      child: ClipRRect(
-                        borderRadius: BorderRadius.circular(20.0),
-                        child: Image.asset(
-                          'assets/images/home_screen/white curry.jpg',
-                          fit: BoxFit.cover,
-                        ),
-                      ),
-                    ),
-                    SizedBox(width: Get.width * .02),
-                    Container(
-                      width: Get.width * 0.8,
-                      height: Get.height * 0.2,
-                      child: ClipRRect(
-                        borderRadius: BorderRadius.circular(20.0),
-                        child: Image.asset(
-                          'assets/images/home_screen/chicken curry.jpg',
-                          fit: BoxFit.cover,
-                        ),
-                      ),
-                    ),
-                    SizedBox(width: Get.width * .02),
-                    Container(
-                      width: Get.width * 0.8,
-                      height: Get.height * 0.2,
-                      child: ClipRRect(
-                        borderRadius: BorderRadius.circular(20.0),
-                        child: Image.asset(
-                          'assets/images/home_screen/rice.jpg',
-                          fit: BoxFit.cover,
-                        ),
-                      ),
-                    )
-                  ],
-                ),
-              ),
-              custHeight,
-              const ReUsableSearchBar(),
-              custHeight,
-              Align(
-                  alignment: Alignment.centerLeft,
-                  child: Text('Categories',
-                      style: GoogleFonts.poppins(
-                          fontSize: 17, fontWeight: FontWeight.bold))),
-              custHeight,
-              Row(
-                mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                children: [
-                  HomeScreenGrid(
-                      onTap: () => Get.to(const FastFoodScreen()),
-                      gridText: 'Fast Food',
-                      gridIcon: 'assets/images/home_screen/fast food.png'),
-                  HomeScreenGrid(
-                      onTap: () => Get.to(const BarbecueScreen()),
-                      gridText: 'Barbecue',
-                      gridIcon: 'assets/images/home_screen/barbecue.png'),
-                  HomeScreenGrid(
-                      onTap: () => Get.to(const DesertFoodScreen()),
-                      gridText: 'Deserts',
-                      gridIcon: 'assets/images/home_screen/desert.png'),
-                  HomeScreenGrid(
-                      onTap: () => Get.to(const SeaFoodScreen()),
-                      gridText: 'Sea Food',
-                      gridIcon: 'assets/images/home_screen/fish.png'),
-                ],
-              ),
-              custHeight,
-              Row(
-                mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                children: [
-                  HomeScreenGrid(
-                      onTap: () => Get.to(const MainCoursesScreen()),
-                      gridText: 'Courses',
-                      gridIcon: 'assets/images/home_screen/main-course.png'),
-                  HomeScreenGrid(
-                      onTap: () => Get.to(const RegionalFoodScreen()),
-                      gridText: 'Regional',
-                      gridIcon: 'assets/images/home_screen/regional food.png'),
-                  HomeScreenGrid(
-                      onTap: () => Get.to(const SpecialDietsScreen()),
-                      gridText: 'Diets',
-                      gridIcon: 'assets/images/home_screen/special diet.png'),
-                  HomeScreenGrid(
-                      onTap: () => Get.to(const VegFoodScreen()),
-                      gridText: 'Veg Food',
-                      gridIcon: 'assets/images/home_screen/veg food.png'),
-                ],
-              ),
-              custHeight,
-              Align(
-                  alignment: Alignment.centerLeft,
-                  child: Text('Recommended Items',
-                      style: GoogleFonts.poppins(
-                          fontSize: 17, fontWeight: FontWeight.bold))),
-              SingleChildScrollView(
-                scrollDirection: Axis.horizontal,
-                child: Padding(
-                  padding: const EdgeInsets.all(8.0),
+      body: GestureDetector(
+        onTap: () {
+          FocusScopeNode currentFocus = FocusScope.of(context);
+          if (!currentFocus.hasPrimaryFocus) {
+            currentFocus.unfocus();
+          }
+        },
+        child: SingleChildScrollView(
+          child: Padding(
+            padding: const EdgeInsets.symmetric(horizontal: 15),
+            child: Column(
+              mainAxisAlignment: MainAxisAlignment.start,
+              children: [
+                Align(
+                    alignment: Alignment.centerLeft,
+                    child: Text('Common Dishes',
+                        style: GoogleFonts.poppins(
+                            fontSize: 17, fontWeight: FontWeight.bold))),
+                SingleChildScrollView(
+                  scrollDirection: Axis.horizontal,
                   child: Row(
                     children: [
-                      const FoodItemCard(
-                          itemImage: 'assets/images/fast_food/Pizza.jpg',
-                          itemName: "Pizza"),
+                      CommonDishesWidget(
+                          scrollImage:
+                              'assets/images/home_screen/white curry.jpg',
+                          scrollText: 'Very Delicious\nWhite Curry'),
                       SizedBox(width: Get.width * .02),
-                      const FoodItemCard(
-                          itemImage:
-                              'assets/images/barbecue/grilled chicken.jpg',
-                          itemName: "Grilled Chicken"),
+                      CommonDishesWidget(
+                          scrollImage:
+                              'assets/images/home_screen/chicken curry.jpg',
+                          scrollText: 'Mouth Watering\nChicken Curry'),
                       SizedBox(width: Get.width * .02),
-                      const FoodItemCard(
-                          itemImage: 'assets/images/deserts/apple pie.jpg',
-                          itemName: "Apple Pie"),
-                      SizedBox(width: Get.width * .02),
-                      const FoodItemCard(
-                          itemImage: 'assets/images/regional/paye.jpg',
-                          itemName: "Paye"),
+                      CommonDishesWidget(
+                          scrollImage: 'assets/images/home_screen/rice.jpg',
+                          scrollText: 'The Famous\nKabuli Pulao')
                     ],
                   ),
                 ),
-              ),
-            ],
+                custHeight,
+                const ReUsableSearchBar(),
+                custHeight,
+                Align(
+                    alignment: Alignment.centerLeft,
+                    child: Text('Categories',
+                        style: GoogleFonts.poppins(
+                            fontSize: 17, fontWeight: FontWeight.bold))),
+                custHeight,
+                Row(
+                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                  children: [
+                    HomeScreenGrid(
+                        onTap: () => Get.to(const FastFoodScreen()),
+                        gridText: 'Fast Food',
+                        gridIcon: 'assets/images/home_screen/fast food.png'),
+                    HomeScreenGrid(
+                        onTap: () => Get.to(const BarbecueScreen()),
+                        gridText: 'Barbecue',
+                        gridIcon: 'assets/images/home_screen/barbecue.png'),
+                    HomeScreenGrid(
+                        onTap: () => Get.to(const DesertFoodScreen()),
+                        gridText: 'Deserts',
+                        gridIcon: 'assets/images/home_screen/desert.png'),
+                    HomeScreenGrid(
+                        onTap: () => Get.to(const SeaFoodScreen()),
+                        gridText: 'Sea Food',
+                        gridIcon: 'assets/images/home_screen/fish.png'),
+                  ],
+                ),
+                custHeight,
+                Row(
+                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                  children: [
+                    HomeScreenGrid(
+                        onTap: () => Get.to(const MainCoursesScreen()),
+                        gridText: 'Courses',
+                        gridIcon: 'assets/images/home_screen/main-course.png'),
+                    HomeScreenGrid(
+                        onTap: () => Get.to(const RegionalFoodScreen()),
+                        gridText: 'Regional',
+                        gridIcon:
+                            'assets/images/home_screen/regional food.png'),
+                    HomeScreenGrid(
+                        onTap: () => Get.to(const SpecialDietsScreen()),
+                        gridText: 'Diets',
+                        gridIcon: 'assets/images/home_screen/special diet.png'),
+                    HomeScreenGrid(
+                        onTap: () => Get.to(const VegFoodScreen()),
+                        gridText: 'Veg Food',
+                        gridIcon: 'assets/images/home_screen/veg food.png'),
+                  ],
+                ),
+                custHeight,
+                Align(
+                    alignment: Alignment.centerLeft,
+                    child: Text('Recommended Items',
+                        style: GoogleFonts.poppins(
+                            fontSize: 17, fontWeight: FontWeight.bold))),
+                SingleChildScrollView(
+                  scrollDirection: Axis.horizontal,
+                  child: Padding(
+                    padding: const EdgeInsets.all(8.0),
+                    child: Row(
+                      children: [
+                        const FoodItemCard(
+                            itemImage: 'assets/images/fast_food/Pizza.jpg',
+                            itemName: "Pizza"),
+                        SizedBox(width: Get.width * .02),
+                        const FoodItemCard(
+                            itemImage:
+                                'assets/images/barbecue/grilled chicken.jpg',
+                            itemName: "Grilled Chicken"),
+                        SizedBox(width: Get.width * .02),
+                        const FoodItemCard(
+                            itemImage: 'assets/images/deserts/apple pie.jpg',
+                            itemName: "Apple Pie"),
+                        SizedBox(width: Get.width * .02),
+                        const FoodItemCard(
+                            itemImage: 'assets/images/regional/paye.jpg',
+                            itemName: "Paye"),
+                      ],
+                    ),
+                  ),
+                ),
+              ],
+            ),
           ),
         ),
       ),

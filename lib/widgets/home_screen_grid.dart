@@ -31,18 +31,15 @@ class HomeScreenGrid extends StatelessWidget {
         //     ]),
         width: Get.width * 0.2,
         height: Get.height * 0.1,
-        child: Padding(
-          padding: const EdgeInsets.only(top: 3),
-          child: Column(
-            children: [
-              Container(
-                width: Get.width * 0.15,
-                height: Get.width * 0.15,
-                child: Image.asset(gridIcon, fit: BoxFit.contain),
-              ),
-              Text(gridText, style: GoogleFonts.poppins()),
-            ],
-          ),
+        child: Column(
+          children: [
+            Container(
+              width: Get.width * 0.15,
+              height: Get.width * 0.15,
+              child: Image.asset(gridIcon, fit: BoxFit.contain),
+            ),
+            Text(gridText, style: GoogleFonts.poppins()),
+          ],
         ),
       ),
     );
