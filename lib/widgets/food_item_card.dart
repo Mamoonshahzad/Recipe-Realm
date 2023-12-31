@@ -20,7 +20,7 @@ class FoodItemCard extends StatelessWidget {
         boxShadow: const [
           BoxShadow(
             color: Colors.red,
-            blurRadius: 6,
+            blurRadius: 5,
             offset: Offset(0, 0), // Shadow position
           ),
         ],

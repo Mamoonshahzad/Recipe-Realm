@@ -10,7 +10,6 @@ import 'package:recipe_realm/view/categories_screens/veg_food_screen.dart';
 import 'package:recipe_realm/widgets/food_item_card.dart';
 import 'package:recipe_realm/widgets/search_bar.dart';
 
-import '../widgets/custom_bottom_bar.dart';
 import '../widgets/home_screen_grid.dart';
 import 'categories_screens/barbecue.dart';
 import 'categories_screens/main_course_screen.dart';
