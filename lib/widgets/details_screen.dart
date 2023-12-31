@@ -45,7 +45,7 @@ class DetailsScreen extends StatelessWidget {
                       color: AppConstant.appMainColor),
                 ),
               ),
-              Divider(height: 1),
+              const Divider(height: 1),
               Text(selectedItem.itemDescription.toString(),
                   style: GoogleFonts.poppins())
             ],
