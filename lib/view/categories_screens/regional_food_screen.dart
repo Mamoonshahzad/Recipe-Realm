@@ -25,6 +25,9 @@ class _RegionalFoodScreenState extends State<RegionalFoodScreen> {
       appBar: AppBar(
         backgroundColor: AppConstant.appMainColor,
         centerTitle: true,
+        leading: GestureDetector(
+            onTap: () => Get.back(),
+            child: const Icon(Icons.arrow_back_ios, color: Colors.white)),
         title: Text('Regional Food',
             style: GoogleFonts.poppins(color: Colors.white)),
       ),
@@ -89,7 +92,7 @@ class _RegionalFoodScreenState extends State<RegionalFoodScreen> {
 
   Future<List<FoodItemsDataModel>> ReadJsonData() async {
     final jsondata =
-        await root_bundle.rootBundle.loadString('jsonfiles/courses.json');
+        await root_bundle.rootBundle.loadString('jsonfiles/regional_food.json');
     final list = json.decode(jsondata) as List<dynamic>;
 
     return list.map((e) => FoodItemsDataModel.fromJson(e)).toList();

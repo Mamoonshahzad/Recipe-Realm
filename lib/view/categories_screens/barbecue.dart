@@ -25,7 +25,9 @@ class _BarbecueScreenState extends State<BarbecueScreen> {
       appBar: AppBar(
         backgroundColor: AppConstant.appMainColor,
         centerTitle: true,
-        leading: const Icon(Icons.arrow_back_ios),
+        leading: GestureDetector(
+            onTap: () => Get.back(),
+            child: const Icon(Icons.arrow_back_ios, color: Colors.white)),
         title:
             Text('Barbecue', style: GoogleFonts.poppins(color: Colors.white)),
       ),

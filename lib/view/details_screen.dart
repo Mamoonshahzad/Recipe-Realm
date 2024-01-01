@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:recipe_realm/model/food_items_model.dart';
 import 'package:recipe_realm/utils/app_constants.dart';
@@ -14,6 +15,9 @@ class DetailsScreen extends StatelessWidget {
       appBar: AppBar(
         backgroundColor: AppConstant.appMainColor,
         centerTitle: true,
+        leading: GestureDetector(
+            onTap: () => Get.back(),
+            child: const Icon(Icons.arrow_back_ios, color: Colors.white)),
         title: Text(selectedItem.itemName as String,
             style: GoogleFonts.poppins(color: Colors.white)),
       ),
@@ -47,8 +51,20 @@ class DetailsScreen extends StatelessWidget {
                 ),
               ),
               const Divider(height: 1),
-              Text(selectedItem.itemDescription.toString(),
-                  style: GoogleFonts.poppins())
+              AppConstant.custHeight,
+              Container(
+                margin: const EdgeInsets.all(6),
+                padding: const EdgeInsets.all(10),
+                decoration: BoxDecoration(
+                    color: Colors.white,
+                    boxShadow: const [
+                      BoxShadow(
+                          color: Colors.red, blurRadius: 3, spreadRadius: 3)
+                    ],
+                    borderRadius: BorderRadius.circular(20)),
+                child: Text(selectedItem.itemDescription.toString(),
+                    style: GoogleFonts.poppins()),
+              )
             ],
           ),
         ),

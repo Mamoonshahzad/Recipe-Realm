@@ -25,6 +25,9 @@ class _SpecialDietsScreenState extends State<SpecialDietsScreen> {
       appBar: AppBar(
         backgroundColor: AppConstant.appMainColor,
         centerTitle: true,
+        leading: GestureDetector(
+            onTap: () => Get.back(),
+            child: const Icon(Icons.arrow_back_ios, color: Colors.white)),
         title: Text('Special Diets',
             style: GoogleFonts.poppins(color: Colors.white)),
       ),

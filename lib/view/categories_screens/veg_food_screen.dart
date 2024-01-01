@@ -24,6 +24,9 @@ class _VegFoodScreenState extends State<VegFoodScreen> {
     return Scaffold(
       appBar: AppBar(
         backgroundColor: AppConstant.appMainColor,
+        leading: GestureDetector(
+            onTap: () => Get.back(),
+            child: const Icon(Icons.arrow_back_ios, color: Colors.white)),
         centerTitle: true,
         title:
             Text('Sea Food', style: GoogleFonts.poppins(color: Colors.white)),

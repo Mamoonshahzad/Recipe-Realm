@@ -25,6 +25,9 @@ class _MainCoursesScreenState extends State<MainCoursesScreen> {
       appBar: AppBar(
         backgroundColor: AppConstant.appMainColor,
         centerTitle: true,
+        leading: GestureDetector(
+            onTap: () => Get.back(),
+            child: const Icon(Icons.arrow_back_ios, color: Colors.white)),
         title: Text('Main Courses',
             style: GoogleFonts.poppins(color: Colors.white)),
       ),
