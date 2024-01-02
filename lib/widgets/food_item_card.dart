@@ -24,7 +24,7 @@ class FoodItemCard extends StatelessWidget {
       child: Column(
         children: [
           Padding(
-            padding: const EdgeInsets.only(top: 10),
+            padding: const EdgeInsets.only(top: 8),
             child: Container(
               padding: const EdgeInsets.only(top: 10),
               width: Get.width * .38,
