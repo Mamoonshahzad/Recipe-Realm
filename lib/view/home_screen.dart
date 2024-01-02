@@ -55,7 +55,7 @@ class _HomeScreenState extends State<HomeScreen> {
           centerTitle: true,
           backgroundColor: AppConstant.appMainColor,
           title: Text('Home Screen',
-              style: GoogleFonts.poppins(color: Colors.white)),
+              style: GoogleFonts.notoSerifMalayalam(color: Colors.white)),
           actions: [
             IconButton(
               icon: const Icon(Icons.favorite, color: Colors.white),
@@ -87,7 +87,7 @@ class _HomeScreenState extends State<HomeScreen> {
                       child: Image.asset(
                           'assets/images/home_screen/welcome_drink.png')),
                   Text('Welcome Foodie',
-                      style: GoogleFonts.poppins(
+                      style: GoogleFonts.notoSerifMalayalam(
                           color: Colors.white,
                           fontSize: 19,
                           fontWeight: FontWeight.bold)),
@@ -99,7 +99,8 @@ class _HomeScreenState extends State<HomeScreen> {
                 mainAxisAlignment: MainAxisAlignment.center,
                 children: [
                   const Icon(Icons.favorite),
-                  Text('Favorite Items', style: GoogleFonts.poppins())
+                  Text('Favorite Items',
+                      style: GoogleFonts.notoSerifMalayalam())
                 ],
               ),
               onTap: () {},
@@ -110,7 +111,7 @@ class _HomeScreenState extends State<HomeScreen> {
                 mainAxisAlignment: MainAxisAlignment.center,
                 children: [
                   const Icon(Icons.star),
-                  Text('Popular Items', style: GoogleFonts.poppins())
+                  Text('Popular Items', style: GoogleFonts.notoSerifMalayalam())
                 ],
               ),
               onTap: () {},
@@ -121,7 +122,8 @@ class _HomeScreenState extends State<HomeScreen> {
                 mainAxisAlignment: MainAxisAlignment.center,
                 children: [
                   const Icon(Icons.recommend),
-                  Text('Recommended Items', style: GoogleFonts.poppins())
+                  Text('Recommended Items',
+                      style: GoogleFonts.notoSerifMalayalam())
                 ],
               ),
               onTap: () {},
@@ -146,7 +148,7 @@ class _HomeScreenState extends State<HomeScreen> {
                 Align(
                     alignment: Alignment.centerLeft,
                     child: Text('Common Dishes',
-                        style: GoogleFonts.poppins(
+                        style: GoogleFonts.notoSerifMalayalam(
                             fontSize: 17, fontWeight: FontWeight.bold))),
                 SingleChildScrollView(
                   scrollDirection: Axis.horizontal,
@@ -174,7 +176,7 @@ class _HomeScreenState extends State<HomeScreen> {
                 Align(
                     alignment: Alignment.centerLeft,
                     child: Text('Categories',
-                        style: GoogleFonts.poppins(
+                        style: GoogleFonts.notoSerifMalayalam(
                             fontSize: 17, fontWeight: FontWeight.bold))),
                 custHeight,
                 Row(
@@ -225,7 +227,7 @@ class _HomeScreenState extends State<HomeScreen> {
                 Align(
                     alignment: Alignment.centerLeft,
                     child: Text('Recommended Items',
-                        style: GoogleFonts.poppins(
+                        style: GoogleFonts.notoSerifMalayalam(
                             fontSize: 17, fontWeight: FontWeight.bold))),
                 SingleChildScrollView(
                   scrollDirection: Axis.horizontal,

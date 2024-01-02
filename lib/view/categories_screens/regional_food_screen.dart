@@ -29,7 +29,7 @@ class _RegionalFoodScreenState extends State<RegionalFoodScreen> {
             onTap: () => Get.back(),
             child: const Icon(Icons.arrow_back_ios, color: Colors.white)),
         title: Text('Regional Food',
-            style: GoogleFonts.poppins(color: Colors.white)),
+            style: GoogleFonts.notoSerifMalayalam(color: Colors.white)),
       ),
       body: GestureDetector(
         onTap: () {

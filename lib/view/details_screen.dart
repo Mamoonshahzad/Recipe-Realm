@@ -19,7 +19,7 @@ class DetailsScreen extends StatelessWidget {
             onTap: () => Get.back(),
             child: const Icon(Icons.arrow_back_ios, color: Colors.white)),
         title: Text(selectedItem.itemName as String,
-            style: GoogleFonts.poppins(color: Colors.white)),
+            style: GoogleFonts.notoSerifMalayalam(color: Colors.white)),
       ),
       body: Padding(
         padding: const EdgeInsets.all(16.0),
@@ -44,7 +44,7 @@ class DetailsScreen extends StatelessWidget {
                 alignment: Alignment.center,
                 child: Text(
                   selectedItem.itemName as String,
-                  style: GoogleFonts.poppins(
+                  style: GoogleFonts.notoSerifMalayalam(
                       fontSize: 18,
                       fontWeight: FontWeight.bold,
                       color: AppConstant.appMainColor),
@@ -62,8 +62,20 @@ class DetailsScreen extends StatelessWidget {
                           color: Colors.red, blurRadius: 3, spreadRadius: 3)
                     ],
                     borderRadius: BorderRadius.circular(20)),
-                child: Text(selectedItem.itemDescription.toString(),
-                    style: GoogleFonts.poppins()),
+                child: Column(
+                  children: [
+                    Text("Ingredients:",
+                        style: GoogleFonts.notoSerifMalayalam(
+                            fontWeight: FontWeight.bold, fontSize: 17)),
+                    Text(selectedItem.ingredients.toString(),
+                        style: GoogleFonts.notoSerifMalayalam(fontSize: 15)),
+                    Text("\nInstructions:",
+                        style: GoogleFonts.notoSerifMalayalam(
+                            fontWeight: FontWeight.bold, fontSize: 17)),
+                    Text(selectedItem.itemDescription.toString(),
+                        style: GoogleFonts.notoSerifMalayalam(fontSize: 15)),
+                  ],
+                ),
               )
             ],
           ),

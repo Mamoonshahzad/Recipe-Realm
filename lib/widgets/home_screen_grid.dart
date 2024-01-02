@@ -29,8 +29,8 @@ class HomeScreenGrid extends StatelessWidget {
         //         offset: Offset(0, 0),
         //       )
         //     ]),
-        width: Get.width * 0.2,
-        height: Get.height * 0.1,
+        // width: Get.width * 0.2,
+        // height: Get.height * 0.13,
         child: Column(
           children: [
             Container(

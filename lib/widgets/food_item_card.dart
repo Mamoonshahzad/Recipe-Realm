@@ -24,7 +24,7 @@ class FoodItemCard extends StatelessWidget {
       child: Column(
         children: [
           Padding(
-            padding: const EdgeInsets.only(top: 10),
+            padding: const EdgeInsets.only(top: 8),
             child: Container(
               padding: const EdgeInsets.only(top: 10),
               width: Get.width * .38,
@@ -37,12 +37,16 @@ class FoodItemCard extends StatelessWidget {
               ),
             ),
           ),
-          Text(itemName,
-              style: GoogleFonts.poppins(fontWeight: FontWeight.bold)),
+          Padding(
+            padding: const EdgeInsets.only(top: 2),
+            child: Text(itemName,
+                style: GoogleFonts.notoSerifMalayalam(
+                    fontWeight: FontWeight.bold)),
+          ),
           Row(
             mainAxisAlignment: MainAxisAlignment.spaceAround,
             children: [
-              Text('Ratings', style: GoogleFonts.poppins()),
+              Text('Ratings', style: GoogleFonts.notoSerifMalayalam()),
               const Row(
                 mainAxisAlignment: MainAxisAlignment.center,
                 children: [

@@ -28,8 +28,8 @@ class _BarbecueScreenState extends State<BarbecueScreen> {
         leading: GestureDetector(
             onTap: () => Get.back(),
             child: const Icon(Icons.arrow_back_ios, color: Colors.white)),
-        title:
-            Text('Barbecue', style: GoogleFonts.poppins(color: Colors.white)),
+        title: Text('Barbecue',
+            style: GoogleFonts.notoSerifMalayalam(color: Colors.white)),
       ),
       body: GestureDetector(
         onTap: () {

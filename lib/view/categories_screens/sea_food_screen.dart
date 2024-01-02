@@ -30,8 +30,8 @@ class _SeaFoodScreenState extends State<SeaFoodScreen> {
         leading: GestureDetector(
             onTap: () => Get.back(),
             child: const Icon(Icons.arrow_back_ios, color: Colors.white)),
-        title:
-            Text('Sea Food', style: GoogleFonts.poppins(color: Colors.white)),
+        title: Text('Sea Food',
+            style: GoogleFonts.notoSerifMalayalam(color: Colors.white)),
       ),
       body: GestureDetector(
         onTap: () {

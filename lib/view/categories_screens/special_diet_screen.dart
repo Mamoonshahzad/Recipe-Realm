@@ -29,7 +29,7 @@ class _SpecialDietsScreenState extends State<SpecialDietsScreen> {
             onTap: () => Get.back(),
             child: const Icon(Icons.arrow_back_ios, color: Colors.white)),
         title: Text('Special Diets',
-            style: GoogleFonts.poppins(color: Colors.white)),
+            style: GoogleFonts.notoSerifMalayalam(color: Colors.white)),
       ),
       body: GestureDetector(
         onTap: () {
