@@ -13,7 +13,7 @@ class _ReUsableSearchBarState extends State<ReUsableSearchBar> {
   Widget build(BuildContext context) {
     return Center(
       child: Container(
-        height: Get.height * .07,
+        height: Get.width * .16,
         decoration: BoxDecoration(
           borderRadius: BorderRadius.circular(15),
           color: Colors.white,

@@ -7,18 +7,38 @@ import 'package:recipe_realm/model/food_items_model.dart';
 import 'package:flutter/services.dart' as root_bundle;
 import 'package:recipe_realm/utils/app_constants.dart';
 import 'package:recipe_realm/widgets/food_item_card.dart';
-import 'package:recipe_realm/widgets/search_bar.dart';
 
 import '../details_screen.dart';
 
 class SpecialDietsScreen extends StatefulWidget {
-  const SpecialDietsScreen({super.key});
+  const SpecialDietsScreen({Key? key}) : super(key: key);
 
   @override
   State<SpecialDietsScreen> createState() => _SpecialDietsScreenState();
 }
 
 class _SpecialDietsScreenState extends State<SpecialDietsScreen> {
+  TextEditingController searchController = TextEditingController();
+  List<FoodItemsDataModel> foodItems = [];
+  List<FoodItemsDataModel> filteredItems = [];
+
+  @override
+  void initState() {
+    super.initState();
+    _loadData();
+  }
+
+  Future<void> _loadData() async {
+    final jsondata =
+        await root_bundle.rootBundle.loadString('jsonfiles/special_diets.json');
+    final list = json.decode(jsondata) as List<dynamic>;
+
+    setState(() {
+      foodItems = list.map((e) => FoodItemsDataModel.fromJson(e)).toList();
+      filteredItems = List.from(foodItems);
+    });
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -26,10 +46,13 @@ class _SpecialDietsScreenState extends State<SpecialDietsScreen> {
         backgroundColor: AppConstant.appMainColor,
         centerTitle: true,
         leading: GestureDetector(
-            onTap: () => Get.back(),
-            child: const Icon(Icons.arrow_back_ios, color: Colors.white)),
-        title: Text('Special Diets',
-            style: GoogleFonts.notoSerifMalayalam(color: Colors.white)),
+          onTap: () => Get.back(),
+          child: const Icon(Icons.arrow_back_ios, color: Colors.white),
+        ),
+        title: Text(
+          'Special Diets',
+          style: GoogleFonts.notoSerifMalayalam(color: Colors.white),
+        ),
       ),
       body: GestureDetector(
         onTap: () {
@@ -42,43 +65,59 @@ class _SpecialDietsScreenState extends State<SpecialDietsScreen> {
           padding: const EdgeInsets.all(8.0),
           child: Column(
             children: [
-              const Padding(
-                padding: EdgeInsets.all(5.0),
-                child: ReUsableSearchBar(),
+              Container(
+                height: Get.width * .16,
+                decoration: BoxDecoration(
+                  borderRadius: BorderRadius.circular(15),
+                  color: Colors.white,
+                  boxShadow: const [
+                    BoxShadow(color: Colors.red, blurRadius: 6),
+                  ],
+                ),
+                child: TextFormField(
+                  onChanged: (query) {
+                    _filterItems(query);
+                  },
+                  decoration: InputDecoration(
+                    suffixIcon: const Icon(Icons.search),
+                    hintText: 'search',
+                    fillColor: Colors.white,
+                    filled: true,
+                    enabledBorder: OutlineInputBorder(
+                      borderRadius: BorderRadius.circular(15),
+                      borderSide: BorderSide(color: Colors.red.shade500),
+                    ),
+                    focusedBorder: OutlineInputBorder(
+                      borderRadius: BorderRadius.circular(15),
+                      borderSide: const BorderSide(color: Colors.tealAccent),
+                    ),
+                  ),
+                ),
               ),
               Expanded(
                 child: Container(
                   width: Get.width,
                   height: Get.height,
-                  child: FutureBuilder(
-                    future: ReadJsonData(),
-                    builder: (context, data) {
-                      if (data.hasError) {
-                        return Center(child: Text('${data.error}'));
-                      } else if (data.hasData) {
-                        var foodItems = data.data as List<FoodItemsDataModel>;
-                        return GridView.builder(
-                            gridDelegate:
-                                const SliverGridDelegateWithFixedCrossAxisCount(
-                                    crossAxisCount: 2),
-                            itemCount: foodItems.length,
-                            itemBuilder: (context, index) {
-                              return GestureDetector(
-                                onTap: () => navigateToDetailsScreen(
-                                    context, foodItems[index]),
-                                child: Padding(
-                                  padding: const EdgeInsets.all(8),
-                                  child: FoodItemCard(
-                                      itemImage:
-                                          foodItems[index].imageUrl.toString(),
-                                      itemName:
-                                          foodItems[index].itemName.toString()),
-                                ),
-                              );
-                            });
-                      } else {
-                        return const Center(child: CircularProgressIndicator());
-                      }
+                  child: GridView.builder(
+                    gridDelegate:
+                        const SliverGridDelegateWithFixedCrossAxisCount(
+                      crossAxisCount: 2,
+                    ),
+                    itemCount: filteredItems.length,
+                    itemBuilder: (context, index) {
+                      return GestureDetector(
+                        onTap: () => navigateToDetailsScreen(
+                          context,
+                          filteredItems[index],
+                        ),
+                        child: Padding(
+                          padding: const EdgeInsets.all(8),
+                          child: FoodItemCard(
+                            itemImage: filteredItems[index].imageUrl.toString(),
+                            itemName: filteredItems[index].itemName.toString(),
+                          ),
+                        ),
+                      );
                     },
                   ),
                 ),
@@ -90,12 +129,13 @@ class _SpecialDietsScreenState extends State<SpecialDietsScreen> {
     );
   }
 
-  Future<List<FoodItemsDataModel>> ReadJsonData() async {
-    final jsondata =
-        await root_bundle.rootBundle.loadString('jsonfiles/special_diets.json');
-    final list = json.decode(jsondata) as List<dynamic>;
-
-    return list.map((e) => FoodItemsDataModel.fromJson(e)).toList();
+  void _filterItems(String query) {
+    setState(() {
+      filteredItems = foodItems
+          .where((item) =>
+              item.itemName!.toLowerCase().contains(query.toLowerCase()))
+          .toList();
+    });
   }
 
   void navigateToDetailsScreen(

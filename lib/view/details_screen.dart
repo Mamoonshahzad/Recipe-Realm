@@ -59,7 +59,9 @@ class DetailsScreen extends StatelessWidget {
                     color: Colors.white,
                     boxShadow: const [
                       BoxShadow(
-                          color: Colors.red, blurRadius: 3, spreadRadius: 3)
+                          color: AppConstant.appMainColor,
+                          blurRadius: 2,
+                          spreadRadius: 2)
                     ],
                     borderRadius: BorderRadius.circular(20)),
                 child: Column(

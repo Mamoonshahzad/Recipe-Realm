@@ -38,7 +38,7 @@ class HomeScreenGrid extends StatelessWidget {
               height: Get.width * 0.15,
               child: Image.asset(gridIcon, fit: BoxFit.contain),
             ),
-            Text(gridText, style: GoogleFonts.poppins()),
+            Text(gridText, style: GoogleFonts.notoSerifMalayalam()),
           ],
         ),
       ),

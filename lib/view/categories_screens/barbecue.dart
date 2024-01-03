@@ -19,83 +19,112 @@ class BarbecueScreen extends StatefulWidget {
 }
 
 class _BarbecueScreenState extends State<BarbecueScreen> {
+  List<FoodItemsDataModel> foodItems = [];
+  List<FoodItemsDataModel> filteredItems = [];
+
   @override
-  Widget build(BuildContext context) {
-    return Scaffold(
-      appBar: AppBar(
-        backgroundColor: AppConstant.appMainColor,
-        centerTitle: true,
-        leading: GestureDetector(
-            onTap: () => Get.back(),
-            child: const Icon(Icons.arrow_back_ios, color: Colors.white)),
-        title: Text('Barbecue',
-            style: GoogleFonts.notoSerifMalayalam(color: Colors.white)),
-      ),
-      body: GestureDetector(
-        onTap: () {
-          FocusScopeNode currentFocus = FocusScope.of(context);
-          if (!currentFocus.hasPrimaryFocus) {
-            currentFocus.unfocus();
-          }
-        },
-        child: Padding(
-          padding: const EdgeInsets.all(8.0),
-          child: Column(
-            children: [
-              const Padding(
-                padding: EdgeInsets.all(5),
-                child: ReUsableSearchBar(),
-              ),
-              Expanded(
-                child: Container(
-                  width: Get.width,
-                  height: Get.height,
-                  child: FutureBuilder(
-                    future: ReadJsonData(),
-                    builder: (context, data) {
-                      if (data.hasError) {
-                        return Center(child: Text('${data.error}'));
-                      } else if (data.hasData) {
-                        var foodItems = data.data as List<FoodItemsDataModel>;
-                        return GridView.builder(
-                            gridDelegate:
-                                const SliverGridDelegateWithFixedCrossAxisCount(
-                                    crossAxisCount: 2),
-                            itemCount: foodItems.length,
-                            itemBuilder: (context, index) {
-                              return GestureDetector(
-                                onTap: () => navigateToDetailsScreen(
-                                    context, foodItems[index]),
-                                child: Padding(
-                                  padding: const EdgeInsets.all(8),
-                                  child: FoodItemCard(
-                                      itemImage:
-                                          foodItems[index].imageUrl.toString(),
-                                      itemName:
-                                          foodItems[index].itemName.toString()),
-                                ),
-                              );
-                            });
-                      } else {
-                        return const Center(child: CircularProgressIndicator());
-                      }
-                    },
-                  ),
-                ),
-              ),
-            ],
-          ),
-        ),
-      ),
-    );
+  void initState() {
+    super.initState();
+    _loadData();
   }
 
-  Future<List<FoodItemsDataModel>> ReadJsonData() async {
+  Future<void> _loadData() async {
     final jsondata =
         await root_bundle.rootBundle.loadString('jsonfiles/barbecue.json');
     final list = json.decode(jsondata) as List<dynamic>;
 
-    return list.map((e) => FoodItemsDataModel.fromJson(e)).toList();
+    setState(() {
+      foodItems = list.map((e) => FoodItemsDataModel.fromJson(e)).toList();
+      filteredItems = List.from(foodItems);
+    });
+  }
+
+  @override
+  Widget build(BuildContext context) {
+    return Scaffold(
+        appBar: AppBar(
+          backgroundColor: AppConstant.appMainColor,
+          centerTitle: true,
+          leading: GestureDetector(
+            onTap: () => Get.back(),
+            child: const Icon(Icons.arrow_back_ios, color: Colors.white),
+          ),
+          title: Text('Barbecue',
+              style: GoogleFonts.notoSerifMalayalam(color: Colors.white)),
+        ),
+        body: GestureDetector(
+            onTap: () {
+              FocusScopeNode currentFocus = FocusScope.of(context);
+              if (!currentFocus.hasPrimaryFocus) {
+                currentFocus.unfocus();
+              }
+            },
+            child: Padding(
+                padding: const EdgeInsets.symmetric(horizontal: 15),
+                child: Column(children: [
+                  Container(
+                    margin: const EdgeInsets.only(top: 20),
+                    decoration: BoxDecoration(
+                      borderRadius: BorderRadius.circular(15),
+                      color: Colors.white,
+                      boxShadow: const [
+                        BoxShadow(
+                            color: AppConstant.appMainColor, blurRadius: 3),
+                      ],
+                    ),
+                    child: TextFormField(
+                      onChanged: (query) {
+                        _filterItems(query);
+                      },
+                      decoration: InputDecoration(
+                        suffixIcon: const Icon(Icons.search),
+                        hintText: 'search',
+                        fillColor: Colors.white,
+                        filled: true,
+                        enabledBorder: OutlineInputBorder(
+                          borderRadius: BorderRadius.circular(15),
+                          borderSide:
+                              const BorderSide(color: AppConstant.appMainColor),
+                        ),
+                        focusedBorder: OutlineInputBorder(
+                          borderRadius: BorderRadius.circular(15),
+                          borderSide:
+                              const BorderSide(color: AppConstant.appMainColor),
+                        ),
+                      ),
+                    ),
+                  ),
+                  AppConstant.custHeight,
+                  Expanded(
+                      child: GridView.builder(
+                          gridDelegate:
+                              const SliverGridDelegateWithFixedCrossAxisCount(
+                            crossAxisCount: 2,
+                            crossAxisSpacing: 10,
+                            mainAxisSpacing: 10,
+                          ),
+                          itemCount: filteredItems.length,
+                          itemBuilder: (context, index) {
+                            return GestureDetector(
+                                onTap: () => navigateToDetailsScreen(
+                                    context, filteredItems[index]),
+                                child: FoodItemCard(
+                                  itemImage:
+                                      filteredItems[index].imageUrl.toString(),
+                                  itemName:
+                                      filteredItems[index].itemName.toString(),
+                                ));
+                          }))
+                ]))));
+  }
+
+  void _filterItems(String query) {
+    setState(() {
+      filteredItems = foodItems
+          .where((item) =>
+              item.itemName!.toLowerCase().contains(query.toLowerCase()))
+          .toList();
+    });
   }
 
   void navigateToDetailsScreen(
