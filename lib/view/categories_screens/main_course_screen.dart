@@ -40,64 +40,60 @@ class _MainCoursesScreenState extends State<MainCoursesScreen> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(
-        backgroundColor: AppConstant.appMainColor,
-        centerTitle: true,
-        leading: GestureDetector(
-          onTap: () => Get.back(),
-          child: const Icon(Icons.arrow_back_ios, color: Colors.white),
+        appBar: AppBar(
+          backgroundColor: AppConstant.appMainColor,
+          centerTitle: true,
+          leading: GestureDetector(
+            onTap: () => Get.back(),
+            child: const Icon(Icons.arrow_back_ios, color: Colors.white),
+          ),
+          title: Text('Main Courses',
+              style: GoogleFonts.notoSerifMalayalam(color: Colors.white)),
         ),
-        title: Text('Main Courses',
-            style: GoogleFonts.notoSerifMalayalam(color: Colors.white)),
-      ),
-      body: GestureDetector(
-        onTap: () {
-          FocusScopeNode currentFocus = FocusScope.of(context);
-          if (!currentFocus.hasPrimaryFocus) {
-            currentFocus.unfocus();
-          }
-        },
-        child: Padding(
-          padding: const EdgeInsets.all(8.0),
-          child: Column(
-            children: [
-              Container(
-                margin: const EdgeInsets.symmetric(vertical: 10),
-                height: Get.width * .16,
-                decoration: BoxDecoration(
-                  borderRadius: BorderRadius.circular(15),
-                  color: Colors.white,
-                  boxShadow: const [
-                    BoxShadow(color: AppConstant.appMainColor, blurRadius: 2),
-                  ],
-                ),
-                child: TextFormField(
-                  onChanged: (query) {
-                    _filterItems(query);
-                  },
-                  decoration: InputDecoration(
-                    suffixIcon: const Icon(Icons.search),
-                    hintText: 'search',
-                    fillColor: Colors.white,
-                    filled: true,
-                    enabledBorder: OutlineInputBorder(
-                      borderRadius: BorderRadius.circular(15),
-                      borderSide:
-                          const BorderSide(color: AppConstant.appMainColor),
-                    ),
-                    focusedBorder: OutlineInputBorder(
-                      borderRadius: BorderRadius.circular(15),
-                      borderSide:
-                          const BorderSide(color: AppConstant.appMainColor),
-                    ),
-                  ),
-                ),
-              ),
-              Expanded(
-                child: Container(
-                  // width: Get.width,
-                  // height: Get.height,
-                  child: FutureBuilder(
+        body: GestureDetector(
+            onTap: () {
+              FocusScopeNode currentFocus = FocusScope.of(context);
+              if (!currentFocus.hasPrimaryFocus) {
+                currentFocus.unfocus();
+              }
+            },
+            child: Padding(
+                padding: const EdgeInsets.all(8.0),
+                child: Column(children: [
+                  Container(
+                      margin: const EdgeInsets.symmetric(vertical: 10),
+                      height: Get.width * .16,
+                      decoration: BoxDecoration(
+                        borderRadius: BorderRadius.circular(15),
+                        color: Colors.white,
+                        boxShadow: const [
+                          BoxShadow(
+                              color: AppConstant.appMainColor, blurRadius: 2),
+                        ],
+                      ),
+                      child: TextFormField(
+                          onChanged: (query) {
+                            _filterItems(query);
+                          },
+                          decoration: InputDecoration(
+                              suffixIcon: const Icon(Icons.search),
+                              hintText: 'search',
+                              fillColor: Colors.white,
+                              filled: true,
+                              enabledBorder: OutlineInputBorder(
+                                borderRadius: BorderRadius.circular(15),
+                                borderSide: const BorderSide(
+                                    color: AppConstant.appMainColor),
+                              ),
+                              focusedBorder: OutlineInputBorder(
+                                  borderRadius: BorderRadius.circular(15),
+                                  borderSide: const BorderSide(
+                                      color: AppConstant.appMainColor))))),
+                  Expanded(
+                      child: Container(
+                          // width: Get.width,
+                          // height: Get.height,
+                          child: FutureBuilder(
                     future: ReadJsonData(),
                     builder: (context, data) {
                       if (data.hasError) {
@@ -129,14 +125,8 @@ class _MainCoursesScreenState extends State<MainCoursesScreen> {
                         return const Center(child: CircularProgressIndicator());
                       }
                     },
-                  ),
-                ),
-              ),
-            ],
-          ),
-        ),
-      ),
-    );
+                  )))
+                ]))));
   }
 
   Future<List<FoodItemsDataModel>> ReadJsonData() async {

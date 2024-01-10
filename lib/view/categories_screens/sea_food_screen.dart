@@ -64,35 +64,32 @@ class _SeaFoodScreenState extends State<SeaFoodScreen> {
                 padding: const EdgeInsets.all(8.0),
                 child: Column(children: [
                   Container(
-                    height: Get.width * .16,
-                    decoration: BoxDecoration(
-                      borderRadius: BorderRadius.circular(15),
-                      color: Colors.white,
-                      boxShadow: const [
-                        BoxShadow(color: Colors.red, blurRadius: 6),
-                      ],
-                    ),
-                    child: TextFormField(
-                      onChanged: (query) {
-                        _filterItems(query);
-                      },
-                      decoration: InputDecoration(
-                        suffixIcon: const Icon(Icons.search),
-                        hintText: 'search',
-                        fillColor: Colors.white,
-                        filled: true,
-                        enabledBorder: OutlineInputBorder(
-                          borderRadius: BorderRadius.circular(15),
-                          borderSide: BorderSide(color: Colors.red.shade500),
-                        ),
-                        focusedBorder: OutlineInputBorder(
-                          borderRadius: BorderRadius.circular(15),
-                          borderSide:
-                              const BorderSide(color: Colors.tealAccent),
-                        ),
+                      height: Get.width * .16,
+                      decoration: BoxDecoration(
+                        borderRadius: BorderRadius.circular(15),
+                        color: Colors.white,
+                        boxShadow: const [
+                          BoxShadow(
+                              color: AppConstant.appMainColor, blurRadius: 3),
+                        ],
                       ),
-                    ),
-                  ),
+                      child: TextFormField(
+                          onChanged: (query) {
+                            _filterItems(query);
+                          },
+                          decoration: InputDecoration(
+                              suffixIcon: const Icon(Icons.search),
+                              hintText: 'search',
+                              fillColor: Colors.white,
+                              filled: true,
+                              enabledBorder: OutlineInputBorder(
+                                  borderRadius: BorderRadius.circular(15),
+                                  borderSide: const BorderSide(
+                                      color: AppConstant.appMainColor)),
+                              focusedBorder: OutlineInputBorder(
+                                  borderRadius: BorderRadius.circular(15),
+                                  borderSide: const BorderSide(
+                                      color: AppConstant.appMainColor))))),
                   Expanded(
                       child: Container(
                           width: Get.width,
@@ -134,10 +131,8 @@ class _SeaFoodScreenState extends State<SeaFoodScreen> {
   void navigateToDetailsScreen(
       BuildContext context, FoodItemsDataModel selectedItem) {
     Navigator.push(
-      context,
-      MaterialPageRoute(
-        builder: (context) => DetailsScreen(selectedItem: selectedItem),
-      ),
-    );
+        context,
+        MaterialPageRoute(
+            builder: (context) => DetailsScreen(selectedItem: selectedItem)));
   }
 }
