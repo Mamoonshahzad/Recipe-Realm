@@ -7,6 +7,7 @@ import 'package:recipe_realm/view/categories_screens/fast_food.dart';
 import 'package:recipe_realm/view/categories_screens/regional_food_screen.dart';
 import 'package:recipe_realm/view/categories_screens/special_diet_screen.dart';
 import 'package:recipe_realm/view/categories_screens/veg_food_screen.dart';
+import 'package:recipe_realm/view/favorite_screen.dart';
 import 'package:recipe_realm/widgets/food_item_card.dart';
 import 'package:recipe_realm/widgets/home_screen_scrollview.dart';
 import 'package:recipe_realm/widgets/search_bar.dart';
@@ -70,7 +71,7 @@ class _HomeScreenState extends State<HomeScreen> {
             actions: [
               IconButton(
                 icon: const Icon(Icons.favorite, color: Colors.white),
-                onPressed: () {},
+                onPressed: () => Get.to(const FavoriteScreen()),
               ),
             ],
             leading: Builder(
@@ -202,7 +203,7 @@ class _HomeScreenState extends State<HomeScreen> {
                             mainAxisAlignment: MainAxisAlignment.spaceBetween,
                             children: [
                               HomeScreenGrid(
-                                  onTap: () => Get.to(const FastFoodScreen()),
+                                  onTap: () => Get.to(const BarbecueScreen()),
                                   gridText: 'Fast Food',
                                   gridIcon:
                                       'assets/images/home_screen/fast food.png'),
@@ -212,12 +213,12 @@ class _HomeScreenState extends State<HomeScreen> {
                                   gridIcon:
                                       'assets/images/home_screen/barbecue.png'),
                               HomeScreenGrid(
-                                  onTap: () => Get.to(const DesertFoodScreen()),
+                                  onTap: () => Get.to(const BarbecueScreen()),
                                   gridText: 'Deserts',
                                   gridIcon:
                                       'assets/images/home_screen/desert.png'),
                               HomeScreenGrid(
-                                  onTap: () => Get.to(const SeaFoodScreen()),
+                                  onTap: () => Get.to(const BarbecueScreen()),
                                   gridText: 'Sea Food',
                                   gridIcon:
                                       'assets/images/home_screen/fish.png'),
@@ -228,25 +229,22 @@ class _HomeScreenState extends State<HomeScreen> {
                             mainAxisAlignment: MainAxisAlignment.spaceBetween,
                             children: [
                               HomeScreenGrid(
-                                  onTap: () =>
-                                      Get.to(const MainCoursesScreen()),
+                                  onTap: () => Get.to(const BarbecueScreen()),
                                   gridText: 'Courses',
                                   gridIcon:
                                       'assets/images/home_screen/main-course.png'),
                               HomeScreenGrid(
-                                  onTap: () =>
-                                      Get.to(const RegionalFoodScreen()),
+                                  onTap: () => Get.to(const BarbecueScreen()),
                                   gridText: 'Regional',
                                   gridIcon:
                                       'assets/images/home_screen/regional food.png'),
                               HomeScreenGrid(
-                                  onTap: () =>
-                                      Get.to(const SpecialDietsScreen()),
+                                  onTap: () => Get.to(const BarbecueScreen()),
                                   gridText: 'Diets',
                                   gridIcon:
                                       'assets/images/home_screen/special diet.png'),
                               HomeScreenGrid(
-                                  onTap: () => Get.to(const VegFoodScreen()),
+                                  onTap: () => Get.to(const BarbecueScreen()),
                                   gridText: 'Veg Food',
                                   gridIcon:
                                       'assets/images/home_screen/veg food.png'),
@@ -266,68 +264,68 @@ class _HomeScreenState extends State<HomeScreen> {
                               child: Padding(
                                   padding: const EdgeInsets.all(8.0),
                                   child: Row(children: [
-                                    GestureDetector(
-                                      onTap: () => navigateToDetailsScreen(
-                                        context,
-                                        FoodItemsDataModel(
-                                            itemName: "Pizza",
-                                            imageUrl:
-                                                'assets/images/fast_food/Pizza.jpg',
-                                            itemDescription: pizzaDesc,
-                                            ingredients: pizzaIngredients),
-                                      ),
-                                      child: const FoodItemCard(
-                                          itemImage:
-                                              'assets/images/fast_food/Pizza.jpg',
-                                          itemName: "Pizza"),
-                                    ),
+                                    // GestureDetector(
+                                    //   onTap: () => navigateToDetailsScreen(
+                                    //     context,
+                                    //     FoodItemsDataModel(
+                                    //         itemName: "Pizza",
+                                    //         imageUrl:
+                                    //             'assets/images/fast_food/Pizza.jpg',
+                                    //         itemDescription: pizzaDesc,
+                                    //         ingredients: pizzaIngredients),
+                                    //   ),
+                                    //   child: const FoodItemCard(
+                                    //       itemImage:
+                                    //           'assets/images/fast_food/Pizza.jpg',
+                                    //       itemName: "Pizza"),
+                                    // ),
                                     SizedBox(width: Get.width * .02),
-                                    GestureDetector(
-                                      onTap: () => navigateToDetailsScreen(
-                                          context,
-                                          FoodItemsDataModel(
-                                              itemName: "Grilled Chicken",
-                                              imageUrl:
-                                                  'assets/images/barbecue/grilled chicken.jpg',
-                                              itemDescription:
-                                                  grilledChickenDesc,
-                                              ingredients:
-                                                  grilledChickenIngredients)),
-                                      child: const FoodItemCard(
-                                          itemImage:
-                                              'assets/images/barbecue/grilled chicken.jpg',
-                                          itemName: "Grilled Chicken"),
-                                    ),
+                                    // GestureDetector(
+                                    //   onTap: () => navigateToDetailsScreen(
+                                    //       context,
+                                    //       FoodItemsDataModel(
+                                    //           itemName: "Grilled Chicken",
+                                    //           imageUrl:
+                                    //               'assets/images/barbecue/grilled chicken.jpg',
+                                    //           itemDescription:
+                                    //               grilledChickenDesc,
+                                    //           ingredients:
+                                    //               grilledChickenIngredients)),
+                                    //   child: const FoodItemCard(
+                                    //       itemImage:
+                                    //           'assets/images/barbecue/grilled chicken.jpg',
+                                    //       itemName: "Grilled Chicken"),
+                                    // ),
                                     SizedBox(width: Get.width * .02),
-                                    GestureDetector(
-                                      onTap: () => navigateToDetailsScreen(
-                                          context,
-                                          FoodItemsDataModel(
-                                              itemName: "Apple Pie",
-                                              imageUrl:
-                                                  'assets/images/deserts/apple pie.jpg',
-                                              itemDescription: applePieDesc,
-                                              ingredients:
-                                                  applePieIngredients)),
-                                      child: const FoodItemCard(
-                                          itemImage:
-                                              'assets/images/deserts/apple pie.jpg',
-                                          itemName: "Apple Pie"),
-                                    ),
+                                    // GestureDetector(
+                                    //   onTap: () => navigateToDetailsScreen(
+                                    //       context,
+                                    //       FoodItemsDataModel(
+                                    //           itemName: "Apple Pie",
+                                    //           imageUrl:
+                                    //               'assets/images/deserts/apple pie.jpg',
+                                    //           itemDescription: applePieDesc,
+                                    //           ingredients:
+                                    //               applePieIngredients)),
+                                    //   child: const FoodItemCard(
+                                    //       itemImage:
+                                    //           'assets/images/deserts/apple pie.jpg',
+                                    //       itemName: "Apple Pie"),
+                                    // ),
                                     SizedBox(width: Get.width * .02),
-                                    GestureDetector(
-                                        onTap: () => navigateToDetailsScreen(
-                                            context,
-                                            FoodItemsDataModel(
-                                                itemName: "Paye",
-                                                imageUrl:
-                                                    'assets/images/regional/paye.jpg',
-                                                itemDescription: payeDesc,
-                                                ingredients: payeIngredients)),
-                                        child: const FoodItemCard(
-                                            itemImage:
-                                                'assets/images/regional/paye.jpg',
-                                            itemName: "Paye"))
+                                    // GestureDetector(
+                                    //     onTap: () => navigateToDetailsScreen(
+                                    //         context,
+                                    //         FoodItemsDataModel(
+                                    //             itemName: "Paye",
+                                    //             imageUrl:
+                                    //                 'assets/images/regional/paye.jpg',
+                                    //             itemDescription: payeDesc,
+                                    //             ingredients: payeIngredients)),
+                                    //     child: const FoodItemCard(
+                                    //         itemImage:
+                                    //             'assets/images/regional/paye.jpg',
+                                    //         itemName: "Paye"))
                                   ])))
                         ])))));
   }

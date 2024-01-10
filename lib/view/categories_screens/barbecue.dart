@@ -21,6 +21,7 @@ class BarbecueScreen extends StatefulWidget {
 class _BarbecueScreenState extends State<BarbecueScreen> {
   List<FoodItemsDataModel> foodItems = [];
   List<FoodItemsDataModel> filteredItems = [];
+  Set<FoodItemsDataModel> favoriteItems = <FoodItemsDataModel>{};
 
   @override
   void initState() {
@@ -63,15 +64,15 @@ class _BarbecueScreenState extends State<BarbecueScreen> {
                 padding: const EdgeInsets.symmetric(horizontal: 15),
                 child: Column(children: [
                   Container(
+                    height: Get.width * .16,
                     margin: const EdgeInsets.only(top: 20),
                     decoration: BoxDecoration(
-                      borderRadius: BorderRadius.circular(15),
-                      color: Colors.white,
-                      boxShadow: const [
-                        BoxShadow(
-                            color: AppConstant.appMainColor, blurRadius: 3),
-                      ],
-                    ),
+                        borderRadius: BorderRadius.circular(15),
+                        color: Colors.white,
+                        boxShadow: const [
+                          BoxShadow(
+                              color: AppConstant.appMainColor, blurRadius: 3)
+                        ]),
                     child: TextFormField(
                       onChanged: (query) {
                         _filterItems(query);
@@ -99,10 +100,9 @@ class _BarbecueScreenState extends State<BarbecueScreen> {
                       child: GridView.builder(
                           gridDelegate:
                               const SliverGridDelegateWithFixedCrossAxisCount(
-                            crossAxisCount: 2,
-                            crossAxisSpacing: 10,
-                            mainAxisSpacing: 10,
-                          ),
+                                  crossAxisCount: 2,
+                                  crossAxisSpacing: 10,
+                                  mainAxisSpacing: 10),
                           itemCount: filteredItems.length,
                           itemBuilder: (context, index) {
                             return GestureDetector(
@@ -113,6 +113,11 @@ class _BarbecueScreenState extends State<BarbecueScreen> {
                                       filteredItems[index].imageUrl.toString(),
                                   itemName:
                                       filteredItems[index].itemName.toString(),
+                                  isFavorite: favoriteItems
+                                      .contains(filteredItems[index]),
+                                  onFavoritePressed: () {
+                                    _toggleFavorite(filteredItems[index]);
+                                  },
                                 ));
                           }))
                 ]))));
@@ -135,5 +140,15 @@ class _BarbecueScreenState extends State<BarbecueScreen> {
         builder: (context) => DetailsScreen(selectedItem: selectedItem),
       ),
     );
+  }
+
+  void _toggleFavorite(FoodItemsDataModel item) {
+    setState(() {
+      if (favoriteItems.contains(item)) {
+        favoriteItems.remove(item);
+      } else {
+        favoriteItems.add(item);
+      }
+    });
   }
 }

@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:recipe_realm/view/favorite_screen.dart';
 import 'package:recipe_realm/view/home_screen.dart';
 import 'package:recipe_realm/view/splash_screens/onboarding_screen.dart';
 
@@ -20,7 +21,7 @@ class MyApp extends StatelessWidget {
         useMaterial3: true,
       ),
       themeMode: ThemeMode.system,
-      home: const OnboardingScreen(),
+      home: const HomeScreen(),
     );
   }
 }
