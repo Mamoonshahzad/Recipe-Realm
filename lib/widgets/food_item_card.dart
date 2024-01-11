@@ -43,12 +43,9 @@ class FoodItemCard extends StatelessWidget {
             ),
           ),
           Row(mainAxisAlignment: MainAxisAlignment.spaceAround, children: [
-            Text('Ratings', style: GoogleFonts.notoSerifMalayalam()),
+            Text('Add to Favorite', style: GoogleFonts.notoSerifMalayalam()),
             const Row(mainAxisAlignment: MainAxisAlignment.center, children: [
-              Icon(Icons.star, color: Colors.yellow, size: 20),
-              Icon(Icons.star, color: Colors.yellow, size: 20),
-              Icon(Icons.star, color: Colors.yellow, size: 20),
-              Icon(Icons.star_border_rounded, size: 20)
+              Icon(Icons.favorite_border, size: 20),
             ])
           ])
         ]));
