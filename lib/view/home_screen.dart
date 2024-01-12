@@ -26,25 +26,12 @@ class HomeScreen extends StatefulWidget {
 }
 
 class _HomeScreenState extends State<HomeScreen> {
-  // List choice = [
-  //   {'title': 'Fast Food', 'image': 'assets/images/home_screen/fast food.png'},
-  //   {'title': 'Barbecue', 'image': 'assets/images/home_screen/barbecue.png'},
-  //   {'title': 'Desert', 'image': 'assets/images/home_screen/desert.png'},
-  //   {'title': 'Sea Food', 'image': 'assets/images/home_screen/fish.png'},
-  //   {'title': 'Diets', 'image': 'assets/images/home_screen/special diet.png'},
-  //   {'title': 'Courses', 'image': 'assets/images/home_screen/main-course.png'},
-  //   {
-  //     'title': 'Regional',
-  //     'image': 'assets/images/home_screen/regional food.png'
-  //   },
-  //   {'title': 'Veg Food', 'image': 'assets/images/home_screen/veg food.png'}
-  // ];
   @override
   Widget build(BuildContext context) {
     String pizzaIngredients =
         "\nFor the Pizza Dough:\n2 1/4 teaspoons (1 packet) active dry yeast\n1 teaspoon sugar\n1 cup warm water (110°F/43°C)\n3 cups all-purpose flour\n1 teaspoon salt\n1 tablespoon olive oil\n\nFor the Pizza Sauce:\n\n1 can (14 ounces) crushed tomatoes\n2 cloves garlic, minced\n1 teaspoon dried oregano\n1 teaspoon dried basil\nSalt and pepper to taste\nFor Toppings:\nShredded mozzarella cheese\nAdditional toppings of your choice (pepperoni, sliced bell peppers, onions, mushrooms, olives, etc.)";
     String pizzaDesc =
-        '\nFor the Pizza Dough:\nActivate the Yeast:\nIn a small bowl, combine the warm water, sugar, and active dry yeast. Let it sit for about 5-10 minutes until the mixture becomes frothy.\n\nMix the Dough:\nIn a large bowl, combine the flour and salt. Make a well in the center and add the yeast mixture and olive oil. Mix until a dough forms.\n\nKnead the Dough:\nTransfer the dough to a floured surface and knead for about 5-7 minutes until it becomes smooth and elastic.\n\nFirst Rise:\nPlace the dough in a lightly oiled bowl, cover it with a damp cloth, and let it rise in a warm place for 1-2 hours, or until it doubles in size.\n\nFor the Pizza Sauce:\nPrepare the Sauce:\nIn a small saucepan, combine the crushed tomatoes, minced garlic, oregano, basil, salt, and pepper. Simmer over low heat for about 15-20 minutes, stirring occasionally.\n\nAssembling the Pizza:\nPreheat the Oven:\nPreheat your oven to the highest temperature it can go (usually around 475°F/245°C or higher).\n\nRoll Out the Dough:\nPunch down the risen dough and roll it out on a floured surface to your desired thickness.\n\nPrepare the Pizza:\nTransfer the rolled-out dough to a pizza stone or baking sheet.\nSpread a thin layer of the pizza sauce over the dough, leaving a border around the edges.\nSprinkle a generous amount of shredded mozzarella cheese over the sauce.\nAdd your favorite toppings.\n\nBake the Pizza:\nBake in the preheated oven for 12-15 minutes or until the crust is golden and the cheese is bubbly and slightly browned.\n\nServe:\nRemove the pizza from the oven, let it cool for a few minutes, then slice and serve.';
+        '\nFor the Pizza Dough:\n Activate the Yeast:\nIn a small bowl, combine the warm water, sugar, and active dry yeast. Let it sit for about 5-10 minutes until the mixture becomes frothy.\n\nMix the Dough:\nIn a large bowl, combine the flour and salt. Make a well in the center and add the yeast mixture and olive oil. Mix until a dough forms.\n\nKnead the Dough:\nTransfer the dough to a floured surface and knead for about 5-7 minutes until it becomes smooth and elastic.\n\nFirst Rise:\nPlace the dough in a lightly oiled bowl, cover it with a damp cloth, and let it rise in a warm place for 1-2 hours, or until it doubles in size.\n\nFor the Pizza Sauce:\nPrepare the Sauce:\nIn a small saucepan, combine the crushed tomatoes, minced garlic, oregano, basil, salt, and pepper. Simmer over low heat for about 15-20 minutes, stirring occasionally.\n\nAssembling the Pizza:\nPreheat the Oven:\nPreheat your oven to the highest temperature it can go (usually around 475°F/245°C or higher).\n\nRoll Out the Dough:\nPunch down the risen dough and roll it out on a floured surface to your desired thickness.\n\nPrepare the Pizza:\nTransfer the rolled-out dough to a pizza stone or baking sheet.\nSpread a thin layer of the pizza sauce over the dough, leaving a border around the edges.\nSprinkle a generous amount of shredded mozzarella cheese over the sauce.\nAdd your favorite toppings.\n\nBake the Pizza:\nBake in the preheated oven for 12-15 minutes or until the crust is golden and the cheese is bubbly and slightly browned.\n\nServe:\nRemove the pizza from the oven, let it cool for a few minutes, then slice and serve.';
 
     String grilledChickenIngredients =
         "\n4 boneless, skinless chicken breasts\n1/4 cup olive oil\n3 tablespoons soy sauce\n2 tablespoons lemon juice\n2 teaspoons honey\n2 teaspoons Dijon mustard\n2 cloves garlic, minced\n1 teaspoon dried oregano\n1 teaspoon dried thyme\nSalt and pepper to taste\n\nOptional: Fresh herbs for garnish (parsley, cilantro, or thyme)";
