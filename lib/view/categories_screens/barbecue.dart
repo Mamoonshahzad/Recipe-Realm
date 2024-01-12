@@ -1,14 +1,11 @@
 import 'dart:convert';
-
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:google_fonts/google_fonts.dart';
-import 'package:recipe_realm/model/food_items_model.dart';
 import 'package:flutter/services.dart' as root_bundle;
+import 'package:recipe_realm/model/food_items_model.dart';
 import 'package:recipe_realm/utils/app_constants.dart';
 import 'package:recipe_realm/widgets/food_item_card.dart';
-import 'package:recipe_realm/widgets/search_bar.dart';
-
 import '../details_screen.dart';
 
 class BarbecueScreen extends StatefulWidget {
@@ -21,6 +18,7 @@ class BarbecueScreen extends StatefulWidget {
 class _BarbecueScreenState extends State<BarbecueScreen> {
   List<FoodItemsDataModel> foodItems = [];
   List<FoodItemsDataModel> filteredItems = [];
+  List<FoodItemsDataModel> favoriteItems = [];
 
   @override
   void initState() {
@@ -63,37 +61,33 @@ class _BarbecueScreenState extends State<BarbecueScreen> {
                 padding: const EdgeInsets.symmetric(horizontal: 15),
                 child: Column(children: [
                   Container(
-                    margin: const EdgeInsets.only(top: 20),
-                    decoration: BoxDecoration(
-                      borderRadius: BorderRadius.circular(15),
-                      color: Colors.white,
-                      boxShadow: const [
-                        BoxShadow(
-                            color: AppConstant.appMainColor, blurRadius: 3),
-                      ],
-                    ),
-                    child: TextFormField(
-                      onChanged: (query) {
-                        _filterItems(query);
-                      },
-                      decoration: InputDecoration(
-                        suffixIcon: const Icon(Icons.search),
-                        hintText: 'search',
-                        fillColor: Colors.white,
-                        filled: true,
-                        enabledBorder: OutlineInputBorder(
-                          borderRadius: BorderRadius.circular(15),
-                          borderSide:
-                              const BorderSide(color: AppConstant.appMainColor),
-                        ),
-                        focusedBorder: OutlineInputBorder(
-                          borderRadius: BorderRadius.circular(15),
-                          borderSide:
-                              const BorderSide(color: AppConstant.appMainColor),
-                        ),
+                      margin: const EdgeInsets.only(top: 20),
+                      decoration: BoxDecoration(
+                        borderRadius: BorderRadius.circular(15),
+                        color: Colors.white,
+                        boxShadow: const [
+                          BoxShadow(
+                              color: AppConstant.appMainColor, blurRadius: 3),
+                        ],
                       ),
-                    ),
-                  ),
+                      child: TextFormField(
+                          onChanged: (query) {
+                            _filterItems(query);
+                          },
+                          decoration: InputDecoration(
+                              suffixIcon: const Icon(Icons.search),
+                              hintText: 'search',
+                              fillColor: Colors.white,
+                              filled: true,
+                              enabledBorder: OutlineInputBorder(
+                                borderRadius: BorderRadius.circular(15),
+                                borderSide: const BorderSide(
+                                    color: AppConstant.appMainColor),
+                              ),
+                              focusedBorder: OutlineInputBorder(
+                                  borderRadius: BorderRadius.circular(15),
+                                  borderSide: const BorderSide(
+                                      color: AppConstant.appMainColor))))),
                   AppConstant.custHeight,
                   Expanded(
                       child: GridView.builder(
@@ -113,6 +107,10 @@ class _BarbecueScreenState extends State<BarbecueScreen> {
                                       filteredItems[index].imageUrl.toString(),
                                   itemName:
                                       filteredItems[index].itemName.toString(),
+                                  onFavorite: (isFavorite) {
+                                    handleFavoriteAction(
+                                        filteredItems[index], isFavorite);
+                                  },
                                 ));
                           }))
                 ]))));
@@ -124,6 +122,20 @@ class _BarbecueScreenState extends State<BarbecueScreen> {
           .where((item) =>
               item.itemName!.toLowerCase().contains(query.toLowerCase()))
           .toList();
+
+      // If you want to retain favorites while filtering, you can update the filteredItems
+      // with only the items that are favorites
+      filteredItems.retainWhere((item) => favoriteItems.contains(item));
+    });
+  }
+
+  void handleFavoriteAction(FoodItemsDataModel item, bool isFavorite) {
+    setState(() {
+      if (isFavorite) {
+        favoriteItems.add(item);
+      } else {
+        favoriteItems.remove(item);
+      }
     });
   }
 
