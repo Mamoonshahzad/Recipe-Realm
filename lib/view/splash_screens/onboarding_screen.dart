@@ -64,7 +64,7 @@ class _OnboardingScreenState extends State<OnboardingScreen> {
                                   pageController.animateToPage(
                                       Get.to(const HomeScreen()) as int,
                                       duration:
-                                          const Duration(milliseconds: 500),
+                                          const Duration(milliseconds: 300),
                                       curve: Curves.ease);
                                 },
                                 child: Center(
