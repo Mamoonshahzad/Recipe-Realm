@@ -26,19 +26,6 @@ class HomeScreen extends StatefulWidget {
 }
 
 class _HomeScreenState extends State<HomeScreen> {
-  // List choice = [
-  //   {'title': 'Fast Food', 'image': 'assets/images/home_screen/fast food.png'},
-  //   {'title': 'Barbecue', 'image': 'assets/images/home_screen/barbecue.png'},
-  //   {'title': 'Desert', 'image': 'assets/images/home_screen/desert.png'},
-  //   {'title': 'Sea Food', 'image': 'assets/images/home_screen/fish.png'},
-  //   {'title': 'Diets', 'image': 'assets/images/home_screen/special diet.png'},
-  //   {'title': 'Courses', 'image': 'assets/images/home_screen/main-course.png'},
-  //   {
-  //     'title': 'Regional',
-  //     'image': 'assets/images/home_screen/regional food.png'
-  //   },
-  //   {'title': 'Veg Food', 'image': 'assets/images/home_screen/veg food.png'}
-  // ];
   @override
   Widget build(BuildContext context) {
     String pizzaIngredients =
