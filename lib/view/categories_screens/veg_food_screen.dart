@@ -12,7 +12,7 @@ import '../details_screen.dart';
 import '../../widgets/search_bar.dart';
 
 class VegFoodScreen extends StatefulWidget {
-  const VegFoodScreen({Key? key}) : super(key: key);
+  const VegFoodScreen({super.key});
 
   @override
   State<VegFoodScreen> createState() => _VegFoodScreenState();
@@ -30,9 +30,9 @@ class _VegFoodScreenState extends State<VegFoodScreen> {
   }
 
   Future<void> _loadData() async {
-    final jsondata =
+    final jsonData =
         await root_bundle.rootBundle.loadString('jsonfiles/veg_food.json');
-    final list = json.decode(jsondata) as List<dynamic>;
+    final list = json.decode(jsonData) as List<dynamic>;
 
     setState(() {
       foodItems = list.map((e) => FoodItemsDataModel.fromJson(e)).toList();
@@ -43,91 +43,69 @@ class _VegFoodScreenState extends State<VegFoodScreen> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(
-        backgroundColor: AppConstant.appMainColor,
-        leading: GestureDetector(
-          onTap: () => Get.back(),
-          child: const Icon(Icons.arrow_back_ios, color: Colors.white),
-        ),
-        centerTitle: true,
-        title: Text(
-          'Veg Food',
-          style: GoogleFonts.notoSerifMalayalam(color: Colors.white),
-        ),
-      ),
-      body: GestureDetector(
-        onTap: () {
-          FocusScopeNode currentFocus = FocusScope.of(context);
-          if (!currentFocus.hasPrimaryFocus) {
-            currentFocus.unfocus();
-          }
-        },
-        child: Padding(
-          padding: const EdgeInsets.all(8.0),
-          child: Column(
-            children: [
-              Container(
-                height: Get.width * .16,
-                decoration: BoxDecoration(
-                  borderRadius: BorderRadius.circular(15),
-                  color: Colors.white,
-                  boxShadow: const [
-                    BoxShadow(color: Colors.red, blurRadius: 6),
-                  ],
-                ),
-                child: TextFormField(
-                  onChanged: (query) {
-                    _filterItems(query);
-                  },
-                  decoration: InputDecoration(
-                    suffixIcon: const Icon(Icons.search),
-                    hintText: 'search',
-                    fillColor: Colors.white,
-                    filled: true,
-                    enabledBorder: OutlineInputBorder(
-                      borderRadius: BorderRadius.circular(15),
-                      borderSide: BorderSide(color: Colors.red.shade500),
-                    ),
-                    focusedBorder: OutlineInputBorder(
-                      borderRadius: BorderRadius.circular(15),
-                      borderSide: const BorderSide(color: Colors.tealAccent),
-                    ),
-                  ),
-                ),
-              ),
-              Expanded(
-                child: Container(
-                  width: Get.width,
-                  height: Get.height,
-                  child: GridView.builder(
-                    gridDelegate:
-                        const SliverGridDelegateWithFixedCrossAxisCount(
-                      crossAxisCount: 2,
-                    ),
-                    itemCount: filteredItems.length,
-                    itemBuilder: (context, index) {
-                      return GestureDetector(
-                        onTap: () => navigateToDetailsScreen(
-                          context,
-                          filteredItems[index],
-                        ),
-                        child: Padding(
-                          padding: const EdgeInsets.all(8),
-                          child: FoodItemCard(
-                            itemImage: filteredItems[index].imageUrl.toString(),
-                            itemName: filteredItems[index].itemName.toString(),
-                          ),
-                        ),
-                      );
-                    },
-                  ),
-                ),
-              ),
-            ],
-          ),
-        ),
-      ),
-    );
+        appBar: AppBar(
+            backgroundColor: AppConstant.appMainColor,
+            leading: GestureDetector(
+                onTap: () => Get.back(),
+                child: const Icon(Icons.arrow_back_ios, color: Colors.white)),
+            centerTitle: true,
+            title: Text('Veg Food',
+                style: GoogleFonts.notoSerifMalayalam(color: Colors.white))),
+        body: GestureDetector(
+            onTap: () {
+              FocusScopeNode currentFocus = FocusScope.of(context);
+              if (!currentFocus.hasPrimaryFocus) {
+                currentFocus.unfocus();
+              }
+            },
+            child: Padding(
+              padding: const EdgeInsets.symmetric(horizontal: 12),
+              child: Column(children: [
+                Container(
+                    margin: const EdgeInsets.symmetric(vertical: 10),
+                    height: Get.width * .16,
+                    decoration: BoxDecoration(
+                        borderRadius: BorderRadius.circular(15),
+                        color: Colors.white),
+                    child: TextFormField(
+                        onChanged: (query) {
+                          _filterItems(query);
+                        },
+                        decoration: InputDecoration(
+                            suffixIcon: const Icon(Icons.search),
+                            hintText: 'search',
+                            fillColor: Colors.white,
+                            filled: true,
+                            enabledBorder: OutlineInputBorder(
+                                borderRadius: BorderRadius.circular(15),
+                                borderSide: const BorderSide(
+                                    color: AppConstant.appMainColor)),
+                            focusedBorder: OutlineInputBorder(
+                                borderRadius: BorderRadius.circular(15),
+                                borderSide: const BorderSide(
+                                    color: AppConstant.appMainColor))))),
+                Expanded(
+                    child: GridView.builder(
+                        padding: const EdgeInsets.all(3),
+                        gridDelegate:
+                            const SliverGridDelegateWithFixedCrossAxisCount(
+                                crossAxisCount: 2,
+                                crossAxisSpacing: 10,
+                                mainAxisSpacing: 10),
+                        itemCount: filteredItems.length,
+                        itemBuilder: (context, index) {
+                          return GestureDetector(
+                              onTap: () => navigateToDetailsScreen(
+                                  context, filteredItems[index]),
+                              child: FoodItemCard(
+                                  itemImage:
+                                      filteredItems[index].imageUrl.toString(),
+                                  itemName: filteredItems[index]
+                                      .itemName
+                                      .toString()));
+                        }))
+              ]),
+            )));
   }
 
   void _filterItems(String query) {
@@ -142,10 +120,8 @@ class _VegFoodScreenState extends State<VegFoodScreen> {
   void navigateToDetailsScreen(
       BuildContext context, FoodItemsDataModel selectedItem) {
     Navigator.push(
-      context,
-      MaterialPageRoute(
-        builder: (context) => DetailsScreen(selectedItem: selectedItem),
-      ),
-    );
+        context,
+        MaterialPageRoute(
+            builder: (context) => DetailsScreen(selectedItem: selectedItem)));
   }
 }
