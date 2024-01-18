@@ -2,20 +2,19 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:recipe_realm/utils/app_constants.dart';
-import 'package:recipe_realm/view/categories_screens/desert_food.dart';
 import 'package:recipe_realm/view/categories_screens/fast_food.dart';
+import 'package:recipe_realm/view/categories_screens/main_course_screen.dart';
 import 'package:recipe_realm/view/categories_screens/regional_food_screen.dart';
+import 'package:recipe_realm/view/categories_screens/sea_food_screen.dart';
 import 'package:recipe_realm/view/categories_screens/special_diet_screen.dart';
 import 'package:recipe_realm/view/categories_screens/veg_food_screen.dart';
 import 'package:recipe_realm/widgets/food_item_card.dart';
 import 'package:recipe_realm/widgets/home_screen_scrollview.dart';
-import 'package:recipe_realm/widgets/search_bar.dart';
 
 import '../model/food_items_model.dart';
 import '../widgets/home_screen_grid.dart';
 import 'categories_screens/barbecue.dart';
-import 'categories_screens/main_course_screen.dart';
-import 'categories_screens/sea_food_screen.dart';
+import 'categories_screens/desert_food.dart';
 import 'details_screen.dart';
 
 class HomeScreen extends StatefulWidget {
@@ -26,25 +25,12 @@ class HomeScreen extends StatefulWidget {
 }
 
 class _HomeScreenState extends State<HomeScreen> {
-  // List choice = [
-  //   {'title': 'Fast Food', 'image': 'assets/images/home_screen/fast food.png'},
-  //   {'title': 'Barbecue', 'image': 'assets/images/home_screen/barbecue.png'},
-  //   {'title': 'Desert', 'image': 'assets/images/home_screen/desert.png'},
-  //   {'title': 'Sea Food', 'image': 'assets/images/home_screen/fish.png'},
-  //   {'title': 'Diets', 'image': 'assets/images/home_screen/special diet.png'},
-  //   {'title': 'Courses', 'image': 'assets/images/home_screen/main-course.png'},
-  //   {
-  //     'title': 'Regional',
-  //     'image': 'assets/images/home_screen/regional food.png'
-  //   },
-  //   {'title': 'Veg Food', 'image': 'assets/images/home_screen/veg food.png'}
-  // ];
   @override
   Widget build(BuildContext context) {
     String pizzaIngredients =
         "\nFor the Pizza Dough:\n2 1/4 teaspoons (1 packet) active dry yeast\n1 teaspoon sugar\n1 cup warm water (110°F/43°C)\n3 cups all-purpose flour\n1 teaspoon salt\n1 tablespoon olive oil\n\nFor the Pizza Sauce:\n\n1 can (14 ounces) crushed tomatoes\n2 cloves garlic, minced\n1 teaspoon dried oregano\n1 teaspoon dried basil\nSalt and pepper to taste\nFor Toppings:\nShredded mozzarella cheese\nAdditional toppings of your choice (pepperoni, sliced bell peppers, onions, mushrooms, olives, etc.)";
     String pizzaDesc =
-        '\nFor the Pizza Dough:\nActivate the Yeast:\nIn a small bowl, combine the warm water, sugar, and active dry yeast. Let it sit for about 5-10 minutes until the mixture becomes frothy.\n\nMix the Dough:\nIn a large bowl, combine the flour and salt. Make a well in the center and add the yeast mixture and olive oil. Mix until a dough forms.\n\nKnead the Dough:\nTransfer the dough to a floured surface and knead for about 5-7 minutes until it becomes smooth and elastic.\n\nFirst Rise:\nPlace the dough in a lightly oiled bowl, cover it with a damp cloth, and let it rise in a warm place for 1-2 hours, or until it doubles in size.\n\nFor the Pizza Sauce:\nPrepare the Sauce:\nIn a small saucepan, combine the crushed tomatoes, minced garlic, oregano, basil, salt, and pepper. Simmer over low heat for about 15-20 minutes, stirring occasionally.\n\nAssembling the Pizza:\nPreheat the Oven:\nPreheat your oven to the highest temperature it can go (usually around 475°F/245°C or higher).\n\nRoll Out the Dough:\nPunch down the risen dough and roll it out on a floured surface to your desired thickness.\n\nPrepare the Pizza:\nTransfer the rolled-out dough to a pizza stone or baking sheet.\nSpread a thin layer of the pizza sauce over the dough, leaving a border around the edges.\nSprinkle a generous amount of shredded mozzarella cheese over the sauce.\nAdd your favorite toppings.\n\nBake the Pizza:\nBake in the preheated oven for 12-15 minutes or until the crust is golden and the cheese is bubbly and slightly browned.\n\nServe:\nRemove the pizza from the oven, let it cool for a few minutes, then slice and serve.';
+        '\nFor the Pizza Dough:\n Activate the Yeast:\nIn a small bowl, combine the warm water, sugar, and active dry yeast. Let it sit for about 5-10 minutes until the mixture becomes frothy.\n\nMix the Dough:\nIn a large bowl, combine the flour and salt. Make a well in the center and add the yeast mixture and olive oil. Mix until a dough forms.\n\nKnead the Dough:\nTransfer the dough to a floured surface and knead for about 5-7 minutes until it becomes smooth and elastic.\n\nFirst Rise:\nPlace the dough in a lightly oiled bowl, cover it with a damp cloth, and let it rise in a warm place for 1-2 hours, or until it doubles in size.\n\nFor the Pizza Sauce:\nPrepare the Sauce:\nIn a small saucepan, combine the crushed tomatoes, minced garlic, oregano, basil, salt, and pepper. Simmer over low heat for about 15-20 minutes, stirring occasionally.\n\nAssembling the Pizza:\nPreheat the Oven:\nPreheat your oven to the highest temperature it can go (usually around 475°F/245°C or higher).\n\nRoll Out the Dough:\nPunch down the risen dough and roll it out on a floured surface to your desired thickness.\n\nPrepare the Pizza:\nTransfer the rolled-out dough to a pizza stone or baking sheet.\nSpread a thin layer of the pizza sauce over the dough, leaving a border around the edges.\nSprinkle a generous amount of shredded mozzarella cheese over the sauce.\nAdd your favorite toppings.\n\nBake the Pizza:\nBake in the preheated oven for 12-15 minutes or until the crust is golden and the cheese is bubbly and slightly browned.\n\nServe:\nRemove the pizza from the oven, let it cool for a few minutes, then slice and serve.';
 
     String grilledChickenIngredients =
         "\n4 boneless, skinless chicken breasts\n1/4 cup olive oil\n3 tablespoons soy sauce\n2 tablespoons lemon juice\n2 teaspoons honey\n2 teaspoons Dijon mustard\n2 cloves garlic, minced\n1 teaspoon dried oregano\n1 teaspoon dried thyme\nSalt and pepper to taste\n\nOptional: Fresh herbs for garnish (parsley, cilantro, or thyme)";
@@ -63,87 +49,85 @@ class _HomeScreenState extends State<HomeScreen> {
     var custHeight = SizedBox(height: Get.height * .02);
     return Scaffold(
         appBar: AppBar(
-            centerTitle: true,
-            backgroundColor: AppConstant.appMainColor,
-            title: Text('Home Screen',
-                style: GoogleFonts.notoSerifMalayalam(color: Colors.white)),
-            actions: [
-              IconButton(
-                icon: const Icon(Icons.favorite, color: Colors.white),
-                onPressed: () {},
-              ),
-            ],
-            leading: Builder(
-                builder: (context) => IconButton(
-                      icon: const Icon(Icons.menu, color: Colors.white),
-                      onPressed: () {
-                        Scaffold.of(context).openDrawer();
-                      },
-                    ))),
-        drawer: Drawer(
-          width: Get.width * .7,
-          child: ListView(
-            padding: EdgeInsets.zero,
-            children: <Widget>[
-              DrawerHeader(
-                decoration: const BoxDecoration(
-                  color: AppConstant.appMainColor,
-                ),
-                child: Column(
-                  crossAxisAlignment: CrossAxisAlignment.center,
-                  children: [
-                    Container(
-                        width: Get.width * .25,
-                        height: Get.width * .25,
-                        child: Image.asset(
-                            'assets/images/home_screen/welcome_drink.png')),
-                    Text('Welcome Foodie',
-                        style: GoogleFonts.notoSerifMalayalam(
-                            color: Colors.white,
-                            fontSize: 19,
-                            fontWeight: FontWeight.bold)),
-                  ],
-                ),
-              ),
-              ListTile(
-                title: Row(
-                  mainAxisAlignment: MainAxisAlignment.center,
-                  children: [
-                    const Icon(Icons.favorite),
-                    Text('Favorite Items',
-                        style: GoogleFonts.notoSerifMalayalam())
-                  ],
-                ),
-                onTap: () {},
-              ),
-              const Divider(height: 1, color: Colors.grey),
-              ListTile(
-                title: Row(
-                  mainAxisAlignment: MainAxisAlignment.center,
-                  children: [
-                    const Icon(Icons.star),
-                    Text('Popular Items',
-                        style: GoogleFonts.notoSerifMalayalam())
-                  ],
-                ),
-                onTap: () {},
-              ),
-              const Divider(height: 1, color: Colors.grey),
-              ListTile(
-                title: Row(
-                  mainAxisAlignment: MainAxisAlignment.center,
-                  children: [
-                    const Icon(Icons.recommend),
-                    Text('Recommended Items',
-                        style: GoogleFonts.notoSerifMalayalam())
-                  ],
-                ),
-                onTap: () {},
-              ),
-              const Divider(height: 1, color: Colors.grey),
-            ],
-          ),
+          centerTitle: true,
+          backgroundColor: AppConstant.appMainColor,
+          title: Text('Home Screen',
+              style: GoogleFonts.notoSerifMalayalam(color: Colors.white)),
+          leading: GestureDetector(
+              onTap: () => Get.back(),
+              child: const Icon(Icons.arrow_back_ios, color: Colors.white)),
         ),
+        // leading: Builder(
+        //     builder: (context) => IconButton(
+        //           icon: const Icon(Icons.menu, color: Colors.white),
+        //           onPressed: () {
+        //             Scaffold.of(context).openDrawer();
+        //           },
+        //         ))),
+        // drawer: Drawer(
+        //   width: Get.width * .7,
+        //   child: ListView(
+        //     padding: EdgeInsets.zero,
+        //     children: <Widget>[
+        //       DrawerHeader(
+        //         decoration: const BoxDecoration(
+        //           color: AppConstant.appMainColor,
+        //         ),
+        //         child: Column(
+        //           crossAxisAlignment: CrossAxisAlignment.center,
+        //           children: [
+        //             Container(
+        //                 width: Get.width * .25,
+        //                 height: Get.width * .25,
+        //                 child: Image.asset(
+        //                     'assets/images/home_screen/welcome_drink.png')),
+        //             Text('Welcome Foodie',
+        //                 style: GoogleFonts.notoSerifMalayalam(
+        //                     color: Colors.white,
+        //                     fontSize: 19,
+        //                     fontWeight: FontWeight.bold)),
+        //           ],
+        //         ),
+        //       ),
+        //       ListTile(
+        //         title: Row(
+        //           mainAxisAlignment: MainAxisAlignment.center,
+        //           children: [
+        //             const Icon(Icons.favorite),
+        //             Text('Favorite Items',
+        //                 style: GoogleFonts.notoSerifMalayalam())
+        //           ],
+        //         ),
+        //         onTap: () {},
+        //       ),
+        //       const Divider(height: 1, color: Colors.grey),
+        //       ListTile(
+        //         title: Row(
+        //           mainAxisAlignment: MainAxisAlignment.center,
+        //           children: [
+        //             const Icon(Icons.star),
+        //             Text('Popular Items',
+        //                 style: GoogleFonts.notoSerifMalayalam())
+        //           ],
+        //         ),
+        //         onTap: () {},
+        //       ),
+        //       const Divider(height: 1, color: Colors.grey),
+        //       ListTile(
+        //         title: Row(
+        //           mainAxisAlignment: MainAxisAlignment.center,
+        //           children: [
+        //             const Icon(Icons.recommend),
+        //             Text('Recommended Items',
+        //                 style: GoogleFonts.notoSerifMalayalam())
+        //           ],
+        //         ),
+        //         onTap: () {},
+        //       ),
+        //       const Divider(height: 1, color: Colors.grey),
+        //     ],
+        //   ),
+        // ),
         body: GestureDetector(
             onTap: () {
               FocusScopeNode currentFocus = FocusScope.of(context);
@@ -158,18 +142,16 @@ class _HomeScreenState extends State<HomeScreen> {
                         mainAxisAlignment: MainAxisAlignment.start,
                         children: [
                           Container(
-                            margin: const EdgeInsets.symmetric(vertical: 10),
-                            child: Align(
-                                alignment: Alignment.centerLeft,
-                                child: Text('Common Dishes',
-                                    style: GoogleFonts.notoSerifMalayalam(
-                                        fontSize: 17,
-                                        fontWeight: FontWeight.bold))),
-                          ),
+                              margin: const EdgeInsets.symmetric(vertical: 10),
+                              child: Align(
+                                  alignment: Alignment.centerLeft,
+                                  child: Text('Common Dishes',
+                                      style: GoogleFonts.notoSerifMalayalam(
+                                          fontSize: 17,
+                                          fontWeight: FontWeight.bold)))),
                           SingleChildScrollView(
-                            scrollDirection: Axis.horizontal,
-                            child: Row(
-                              children: [
+                              scrollDirection: Axis.horizontal,
+                              child: Row(children: [
                                 CommonDishesWidget(
                                     scrollImage:
                                         'assets/images/home_screen/white curry.jpg',
@@ -185,18 +167,15 @@ class _HomeScreenState extends State<HomeScreen> {
                                     scrollImage:
                                         'assets/images/home_screen/rice.jpg',
                                     scrollText: 'The Famous\nKabuli Pulao')
-                              ],
-                            ),
-                          ),
+                              ])),
                           Container(
-                            margin: const EdgeInsets.symmetric(vertical: 10),
-                            child: Align(
-                                alignment: Alignment.centerLeft,
-                                child: Text('Categories',
-                                    style: GoogleFonts.notoSerifMalayalam(
-                                        fontSize: 17,
-                                        fontWeight: FontWeight.bold))),
-                          ),
+                              margin: const EdgeInsets.symmetric(vertical: 10),
+                              child: Align(
+                                  alignment: Alignment.centerLeft,
+                                  child: Text('Categories',
+                                      style: GoogleFonts.notoSerifMalayalam(
+                                          fontSize: 17,
+                                          fontWeight: FontWeight.bold)))),
                           custHeight,
                           Row(
                             mainAxisAlignment: MainAxisAlignment.spaceBetween,
@@ -281,7 +260,7 @@ class _HomeScreenState extends State<HomeScreen> {
                                               'assets/images/fast_food/Pizza.jpg',
                                           itemName: "Pizza"),
                                     ),
-                                    SizedBox(width: Get.width * .02),
+                                    SizedBox(width: Get.width * .04),
                                     GestureDetector(
                                       onTap: () => navigateToDetailsScreen(
                                           context,
@@ -298,23 +277,22 @@ class _HomeScreenState extends State<HomeScreen> {
                                               'assets/images/barbecue/grilled chicken.jpg',
                                           itemName: "Grilled Chicken"),
                                     ),
-                                    SizedBox(width: Get.width * .02),
+                                    SizedBox(width: Get.width * .04),
                                     GestureDetector(
-                                      onTap: () => navigateToDetailsScreen(
-                                          context,
-                                          FoodItemsDataModel(
-                                              itemName: "Apple Pie",
-                                              imageUrl:
-                                                  'assets/images/deserts/apple pie.jpg',
-                                              itemDescription: applePieDesc,
-                                              ingredients:
-                                                  applePieIngredients)),
-                                      child: const FoodItemCard(
-                                          itemImage:
-                                              'assets/images/deserts/apple pie.jpg',
-                                          itemName: "Apple Pie"),
-                                    ),
-                                    SizedBox(width: Get.width * .02),
+                                        onTap: () => navigateToDetailsScreen(
+                                            context,
+                                            FoodItemsDataModel(
+                                                itemName: "Apple Pie",
+                                                imageUrl:
+                                                    'assets/images/deserts/apple pie.jpg',
+                                                itemDescription: applePieDesc,
+                                                ingredients:
+                                                    applePieIngredients)),
+                                        child: const FoodItemCard(
+                                            itemImage:
+                                                'assets/images/deserts/apple pie.jpg',
+                                            itemName: "Apple Pie")),
+                                    SizedBox(width: Get.width * .04),
                                     GestureDetector(
                                         onTap: () => navigateToDetailsScreen(
                                             context,

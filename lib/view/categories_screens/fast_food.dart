@@ -27,9 +27,9 @@ class _FastFoodScreenState extends State<FastFoodScreen> {
   }
 
   Future<void> _loadData() async {
-    final jsondata = await root_bundle.rootBundle
+    final jsonData = await root_bundle.rootBundle
         .loadString('jsonfiles/fast_food_item.json');
-    final list = json.decode(jsondata) as List<dynamic>;
+    final list = json.decode(jsonData) as List<dynamic>;
 
     setState(() {
       foodItems = list.map((e) => FoodItemsDataModel.fromJson(e)).toList();
@@ -40,109 +40,87 @@ class _FastFoodScreenState extends State<FastFoodScreen> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(
-        backgroundColor: AppConstant.appMainColor,
-        centerTitle: true,
-        leading: GestureDetector(
-          onTap: () => Get.back(),
-          child: const Icon(Icons.arrow_back_ios, color: Colors.white),
-        ),
-        title: Text('Fast Food',
-            style: GoogleFonts.notoSerifMalayalam(color: Colors.white)),
-      ),
-      body: GestureDetector(
-        onTap: () {
-          FocusScopeNode currentFocus = FocusScope.of(context);
-          if (!currentFocus.hasPrimaryFocus) {
-            currentFocus.unfocus();
-          }
-        },
-        child: Padding(
-          padding: const EdgeInsets.all(8.0),
-          child: Column(
-            children: [
+        appBar: AppBar(
+            backgroundColor: AppConstant.appMainColor,
+            centerTitle: true,
+            leading: GestureDetector(
+                onTap: () => Get.back(),
+                child: const Icon(Icons.arrow_back_ios, color: Colors.white)),
+            title: Text('Fast Food',
+                style: GoogleFonts.notoSerifMalayalam(color: Colors.white))),
+        body: GestureDetector(
+            onTap: () {
+              FocusScopeNode currentFocus = FocusScope.of(context);
+              if (!currentFocus.hasPrimaryFocus) {
+                currentFocus.unfocus();
+              }
+            },
+            child: Column(children: [
               Container(
-                margin: const EdgeInsets.symmetric(horizontal: 5),
-                height: Get.width * .16,
-                decoration: BoxDecoration(
-                  borderRadius: BorderRadius.circular(15),
-                  color: Colors.white,
-                  boxShadow: const [
-                    BoxShadow(color: AppConstant.appMainColor, blurRadius: 3),
-                  ],
-                ),
-                child: TextFormField(
-                  onChanged: (query) {
-                    _filterItems(query);
-                  },
-                  decoration: InputDecoration(
-                    suffixIcon: const Icon(Icons.search),
-                    hintText: 'search',
-                    fillColor: Colors.white,
-                    filled: true,
-                    enabledBorder: OutlineInputBorder(
+                  margin:
+                      const EdgeInsets.symmetric(horizontal: 10, vertical: 10),
+                  height: Get.width * .16,
+                  decoration: BoxDecoration(
                       borderRadius: BorderRadius.circular(15),
-                      borderSide:
-                          const BorderSide(color: AppConstant.appMainColor),
-                    ),
-                    focusedBorder: OutlineInputBorder(
-                      borderRadius: BorderRadius.circular(15),
-                      borderSide:
-                          const BorderSide(color: AppConstant.appMainColor),
-                    ),
-                  ),
-                ),
-              ),
-              Expanded(
-                child: Container(
-                  width: Get.width,
-                  height: Get.height,
-                  child: FutureBuilder(
-                    future: ReadJsonData(),
-                    builder: (context, data) {
-                      if (data.hasError) {
-                        return Center(child: Text('${data.error}'));
-                      } else if (data.hasData) {
-                        return GridView.builder(
-                          gridDelegate:
-                              const SliverGridDelegateWithFixedCrossAxisCount(
-                            crossAxisCount: 2,
+                      color: Colors.white),
+                  child: TextFormField(
+                      onChanged: (query) {
+                        _filterItems(query);
+                      },
+                      decoration: InputDecoration(
+                          suffixIcon: const Icon(Icons.search),
+                          hintText: 'search',
+                          fillColor: Colors.white,
+                          filled: true,
+                          enabledBorder: OutlineInputBorder(
+                            borderRadius: BorderRadius.circular(15),
+                            borderSide: const BorderSide(
+                                color: AppConstant.appMainColor),
                           ),
-                          itemCount: filteredItems.length,
-                          itemBuilder: (context, index) {
-                            return GestureDetector(
-                              onTap: () => navigateToDetailsScreen(
-                                  context, filteredItems[index]),
-                              child: Padding(
-                                padding: const EdgeInsets.all(8),
-                                child: FoodItemCard(
-                                  itemImage:
-                                      filteredItems[index].imageUrl.toString(),
-                                  itemName:
-                                      filteredItems[index].itemName.toString(),
-                                ),
-                              ),
-                            );
-                          },
-                        );
-                      } else {
-                        return const Center(child: CircularProgressIndicator());
-                      }
-                    },
-                  ),
-                ),
-              ),
-            ],
-          ),
-        ),
-      ),
-    );
+                          focusedBorder: OutlineInputBorder(
+                              borderRadius: BorderRadius.circular(15),
+                              borderSide: const BorderSide(
+                                  color: AppConstant.appMainColor))))),
+              Expanded(
+                  child: FutureBuilder(
+                      future: readJsonData(),
+                      builder: (context, data) {
+                        if (data.hasError) {
+                          return Center(child: Text('${data.error}'));
+                        } else if (data.hasData) {
+                          return GridView.builder(
+                              padding: const EdgeInsets.symmetric(
+                                  horizontal: 12, vertical: 2),
+                              gridDelegate:
+                                  const SliverGridDelegateWithFixedCrossAxisCount(
+                                      crossAxisCount: 2,
+                                      crossAxisSpacing: 10,
+                                      mainAxisSpacing: 10),
+                              itemCount: filteredItems.length,
+                              itemBuilder: (context, index) {
+                                return GestureDetector(
+                                    onTap: () => navigateToDetailsScreen(
+                                        context, filteredItems[index]),
+                                    child: FoodItemCard(
+                                        itemImage: filteredItems[index]
+                                            .imageUrl
+                                            .toString(),
+                                        itemName: filteredItems[index]
+                                            .itemName
+                                            .toString()));
+                              });
+                        } else {
+                          return const Center(
+                              child: CircularProgressIndicator());
+                        }
+                      }))
+            ])));
   }
 
-  Future<List<FoodItemsDataModel>> ReadJsonData() async {
-    final jsondata = await root_bundle.rootBundle
+  Future<List<FoodItemsDataModel>> readJsonData() async {
+    final jsonData = await root_bundle.rootBundle
         .loadString('jsonfiles/fast_food_item.json');
-    final list = json.decode(jsondata) as List<dynamic>;
+    final list = json.decode(jsonData) as List<dynamic>;
 
     return list.map((e) => FoodItemsDataModel.fromJson(e)).toList();
   }
@@ -150,11 +128,9 @@ class _FastFoodScreenState extends State<FastFoodScreen> {
   void navigateToDetailsScreen(
       BuildContext context, FoodItemsDataModel selectedItem) {
     Navigator.push(
-      context,
-      MaterialPageRoute(
-        builder: (context) => DetailsScreen(selectedItem: selectedItem),
-      ),
-    );
+        context,
+        MaterialPageRoute(
+            builder: (context) => DetailsScreen(selectedItem: selectedItem)));
   }
 
   void _filterItems(String query) {
