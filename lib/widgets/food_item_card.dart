@@ -38,7 +38,7 @@ class FoodItemCardState extends State<FoodItemCard> {
                   decoration: BoxDecoration(
                       color: Colors.black12,
                       image: DecorationImage(
-                        image: AssetImage(widget.itemImage),
+                        image: NetworkImage(widget.itemImage),
                         fit: BoxFit.cover,
                       ),
                       borderRadius: BorderRadius.circular(10)))),
