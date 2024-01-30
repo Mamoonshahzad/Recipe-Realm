@@ -32,7 +32,7 @@ class DetailsScreen extends StatelessWidget {
                 height: 200, // Adjust the height as needed
                 child: ClipRRect(
                   borderRadius: BorderRadius.circular(20), // Clip the image
-                  child: Image.asset(
+                  child: Image.network(
                     selectedItem.imageUrl as String,
                     fit: BoxFit.cover,
                   ),
@@ -60,8 +60,8 @@ class DetailsScreen extends StatelessWidget {
                     boxShadow: const [
                       BoxShadow(
                           color: AppConstant.appMainColor,
-                          blurRadius: 2,
-                          spreadRadius: 2)
+                          blurRadius: 1,
+                          spreadRadius: 1)
                     ],
                     borderRadius: BorderRadius.circular(20)),
                 child: Column(

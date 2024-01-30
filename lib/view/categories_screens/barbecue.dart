@@ -86,6 +86,7 @@ class _BarbecueScreenState extends State<BarbecueScreen> {
                 AppConstant.custHeight,
                 Expanded(
                     child: GridView.builder(
+                        padding: const EdgeInsets.all(1),
                         gridDelegate:
                             const SliverGridDelegateWithFixedCrossAxisCount(
                           crossAxisCount: 2,
