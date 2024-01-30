@@ -1,0 +1,29 @@
+{
+  "project_info": {
+    "project_number": "117282366625",
+    "project_id": "recipe-realm-2feed",
+    "storage_bucket": "recipe-realm-2feed.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:117282366625:android:73a6547967e05794a27ce0",
+        "android_client_info": {
+          "package_name": "com.example.recipe_realm"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyDGan3NcQKC6zUlXdUM7bn3fwoZYd_95o0"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
