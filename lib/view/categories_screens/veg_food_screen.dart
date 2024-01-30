@@ -9,7 +9,6 @@ import 'package:recipe_realm/widgets/food_item_card.dart';
 
 import '../../utils/app_constants.dart';
 import '../details_screen.dart';
-import '../../widgets/search_bar.dart';
 
 class VegFoodScreen extends StatefulWidget {
   const VegFoodScreen({super.key});

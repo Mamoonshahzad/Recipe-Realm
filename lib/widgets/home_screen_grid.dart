@@ -16,26 +16,20 @@ class HomeScreenGrid extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return GestureDetector(
-      onTap: onTap,
-      child: Container(
-        // decoration: BoxDecoration(
-        //     borderRadius: BorderRadius.circular(10),
-        //     color: Colors.white,
-        //     boxShadow: const [
-        //       BoxShadow(
-        //         color: Colors.red,
-        //         blurRadius: 6,
-        //         offset: Offset(0, 0),
-        //       )
-        //     ]),
-        // width: Get.width * 0.2,
-        // height: Get.height * 0.13,
+    return Container(
+      decoration: BoxDecoration(
+          border: Border.all(width: 1), borderRadius: BorderRadius.circular(5)),
+      width: Get.width * 0.3,
+      height: Get.width * 0.3,
+      child: GestureDetector(
+        onTap: onTap,
         child: Column(
           children: [
             Container(
-              width: Get.width * 0.15,
-              height: Get.width * 0.15,
+              decoration: BoxDecoration(
+                  color: Colors.green, borderRadius: BorderRadius.circular(20)),
+              width: Get.width * 0.23,
+              height: Get.width * 0.23,
               child: Image.asset(gridIcon, fit: BoxFit.contain),
             ),
             Text(gridText, style: GoogleFonts.notoSerifMalayalam()),

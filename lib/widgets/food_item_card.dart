@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:get/get.dart';
 import 'package:google_fonts/google_fonts.dart';
+import 'package:cached_network_image/cached_network_image.dart';
 
 import '../utils/app_constants.dart';
 
@@ -20,56 +20,72 @@ class FoodItemCardState extends State<FoodItemCard> {
 
   @override
   Widget build(BuildContext context) {
-    return Container(
-        width: Get.width * .44,
-        height: Get.width * .46,
-        decoration: BoxDecoration(
+    return LayoutBuilder(
+        builder: (BuildContext context, BoxConstraints constraints) {
+      return Container(
+          width: constraints.maxWidth,
+          height: constraints.maxHeight,
+          decoration: BoxDecoration(
             color: Colors.white,
             borderRadius: BorderRadius.circular(10),
             boxShadow: const [
-              BoxShadow(color: AppConstant.appMainColor, blurRadius: 2)
-            ]),
-        child: Column(children: [
-          Padding(
-              padding: const EdgeInsets.only(top: 7),
-              child: Container(
-                  width: Get.width * .4,
-                  height: Get.width * .28,
-                  decoration: BoxDecoration(
-                      color: Colors.black12,
-                      image: DecorationImage(
-                        image: NetworkImage(widget.itemImage),
-                        fit: BoxFit.cover,
+              BoxShadow(color: AppConstant.appMainColor, blurRadius: 1)
+            ],
+          ),
+          child: ClipRRect(
+              borderRadius: BorderRadius.circular(10),
+              child: Column(
+                  crossAxisAlignment: CrossAxisAlignment.stretch,
+                  children: [
+                    Expanded(
+                      child: AspectRatio(
+                        aspectRatio: 1.0,
+                        child: CachedNetworkImage(
+                          imageUrl: widget.itemImage,
+                          fit: BoxFit.cover,
+                          placeholder: (context, url) => const Center(
+                            child: CircularProgressIndicator(),
+                          ),
+                          errorWidget: (context, url, error) =>
+                              const Icon(Icons.error),
+                        ),
                       ),
-                      borderRadius: BorderRadius.circular(10)))),
-          Padding(
-              padding:
-                  EdgeInsets.only(top: Get.width * .01, left: Get.width * .031),
-              child: Align(
-                  alignment: Alignment.centerLeft,
-                  child: Text(widget.itemName,
-                      style: GoogleFonts.notoSerifMalayalam(
-                          fontWeight: FontWeight.bold)))),
-          Padding(
-              padding: EdgeInsets.only(left: Get.width * .03),
-              child: Align(
-                  alignment: Alignment.centerLeft,
-                  child: Row(
-                    children: [
-                      Container(
-                          decoration: BoxDecoration(
-                              color: Colors.green,
-                              borderRadius: BorderRadius.circular(5)),
-                          child: Padding(
-                              padding: const EdgeInsets.symmetric(
-                                  horizontal: 7, vertical: 3),
-                              child: Text('View Details',
-                                  style: GoogleFonts.notoSerifMalayalam(
-                                      color: Colors.white, fontSize: 11)))),
-                      SizedBox(width: Get.width * .01),
-                      const Icon(Icons.arrow_forward, size: 20)
-                    ],
-                  )))
-        ]));
+                    ),
+                    Padding(
+                        padding: const EdgeInsets.all(10),
+                        child: Column(
+                            crossAxisAlignment: CrossAxisAlignment.start,
+                            children: [
+                              Text(
+                                widget.itemName,
+                                style: GoogleFonts.notoSerifMalayalam(
+                                  fontWeight: FontWeight.bold,
+                                ),
+                              ),
+                              const SizedBox(height: 5),
+                              Row(children: [
+                                Container(
+                                  decoration: BoxDecoration(
+                                    color: Colors.green,
+                                    borderRadius: BorderRadius.circular(5),
+                                  ),
+                                  child: Padding(
+                                    padding: const EdgeInsets.symmetric(
+                                        horizontal: 8, vertical: 4),
+                                    child: Text(
+                                      'View Details',
+                                      style: GoogleFonts.notoSerifMalayalam(
+                                        color: Colors.white,
+                                        fontSize: 11,
+                                      ),
+                                    ),
+                                  ),
+                                ),
+                                const SizedBox(width: 5),
+                                const Icon(Icons.arrow_forward, size: 20),
+                              ])
+                            ]))
+                  ])));
+    });
   }
 }

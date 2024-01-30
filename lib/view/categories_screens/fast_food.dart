@@ -59,7 +59,7 @@ class _FastFoodScreenState extends State<FastFoodScreen> {
               Container(
                   margin:
                       const EdgeInsets.symmetric(horizontal: 10, vertical: 10),
-                  height: Get.width * .16,
+                  // height: Get.width * .16,
                   decoration: BoxDecoration(
                       borderRadius: BorderRadius.circular(15),
                       color: Colors.white),
