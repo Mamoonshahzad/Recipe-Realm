@@ -60,7 +60,8 @@ class _BarbecueScreenState extends State<BarbecueScreen> {
               },
               child: Column(children: [
                 Container(
-                    margin: const EdgeInsets.only(top: 15),
+                    margin:
+                    const EdgeInsets.symmetric(vertical: 10),
                     height: Get.width * .16,
                     decoration: BoxDecoration(
                         borderRadius: BorderRadius.circular(15),
@@ -83,7 +84,6 @@ class _BarbecueScreenState extends State<BarbecueScreen> {
                                 borderRadius: BorderRadius.circular(15),
                                 borderSide: const BorderSide(
                                     color: AppConstant.appMainColor))))),
-                AppConstant.custHeight,
                 Expanded(
                     child: GridView.builder(
                         padding: const EdgeInsets.all(1),
